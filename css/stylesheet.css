@@ -1,0 +1,294 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%; 
+    width: 100%;
+    background-color: blue;
+    display: grid;
+    grid-template-areas: "sidebar header "
+    "sidebar main "
+    "sidebar footer "  ;
+    grid-template-columns: 1fr 8fr ;
+}
+
+/* header */
+header{
+    display: flex;
+    height: 3em ;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: rgba(199, 183, 111);
+    text-align: right;
+    grid-area: header;
+}
+
+/* header fin */
+
+/* sidebar */
+
+.sidebar{
+    background-color: rgb(80, 73, 40);
+    grid-area: sidebar;
+    
+}
+
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    row-gap: 32px;
+    margin-top: 16px;
+    color: white;
+    list-style: none;
+    text-align: center;
+}
+
+.sidebar ul li a{
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar ul li a:hover{
+    background-color: black;
+}
+
+/* sidebar fin */
+
+
+/* main - index*/
+
+.main-index{
+    grid-area: main;
+    background-color: red;
+    display: grid;
+    grid-template-areas: "carousel carousel"
+    "principal tools";
+}
+
+.carrusel{
+    grid-area: carousel;
+    display: flex;
+    justify-content: center;
+    
+
+}
+
+.articles-container{
+    flex-direction: column;
+}
+
+.index-article-main{
+    display: grid;
+    margin: 24px;
+    grid-template-columns: 60% 40%;
+}
+
+
+.index-article-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.index-article-img{
+    display: flex;
+    justify-content: center;
+
+}
+
+.left-info{
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+  row-gap: 24px;
+  align-items: center;
+}
+
+/* main - materias historia*/
+
+.main-inscripcion-materias{
+    grid-area: main;
+    display: grid;
+    background-color: red;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: auto;
+}
+
+.inscription-titles{
+    display: flex;
+    flex-direction: column;
+    margin: 32px;
+}
+
+.inscription-titles ul {
+    display: flex;
+    flex-direction: row;
+    column-gap: 6px;
+    text-decoration: none;
+    list-style: none;
+}
+
+.inscription-titles ul li a{
+    text-decoration: none;
+}
+
+.subjects {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 64px;
+}
+
+.subject {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 16px;
+}
+
+
+/* main - inscripcion historia*/
+
+
+.main-inscripcion-historia{
+    grid-area: main;
+    display: grid;
+    background-color: red;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+}
+
+.subject-matters{
+    margin-bottom: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 64px;
+}
+
+.subject-matter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 16px;
+}
+
+/* main - inscripcion a la asignatura*/
+
+.main-inscripcion-asignatura{
+    grid-area: main;
+    display: grid;
+    background-color: red;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+}
+
+.asignatura-subject-matter {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 64px;
+}
+
+.asignatura-subject {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 16px;
+}
+
+.form-suscribe{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 16px;
+    margin-bottom: 16px;
+}
+
+
+/* main - plataforma de la asignatura*/
+
+.main-asignatura {
+    grid-area: main;
+    display: grid;
+    background-color: red;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+}
+
+.platform{
+    margin: 20px;
+    background-color: beige;
+}
+
+.platform-menu ul{
+    margin-top: 12px;
+    margin-left: 12px;
+    display: flex;
+    column-gap: 32px;
+    text-decoration: none;
+    list-style: none
+}
+
+.platform-menu ul li a{
+    text-decoration: none;
+    background-color: black;
+    color: rgb(202, 35, 35);
+}
+
+.platform-corp{
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+    margin: 12px;
+    border-top-style: solid;
+    border-color: rgb(206, 206, 206);
+}
+
+.platform-corp img{
+    align-self: center;
+}
+
+.platform p {
+    width: 70%;
+}
+
+/* main fin*/
+
+/* footer*/
+
+footer{
+    background-color: rgba(199, 183, 111, 0.78);
+    grid-area: footer;
+}
+
+.contact{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.location-telephone{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 24px;
+    
+}
+/* nav footer*/
