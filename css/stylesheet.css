@@ -2,6 +2,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family:sans-serif ;
+    
 }
 
 html {
@@ -9,20 +11,23 @@ html {
 }
 
 body {
-    height: 100%; 
     width: 100%;
+    min-height: 100vh;
     background-color: blue;
     display: grid;
-    grid-template-areas: "sidebar header "
-    "sidebar main "
-    "sidebar footer "  ;
+    grid-template-areas: "sidebar header"
+    "sidebar main"
+    "sidebar footer"  ;
     grid-template-columns: 1fr 8fr ;
+    grid-template-rows: 3em auto 8em;
 }
 
+body p{
+    margin-bottom: 0;
+}
 /* header */
 header{
     display: flex;
-    height: 3em ;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
@@ -38,17 +43,19 @@ header{
 .sidebar{
     background-color: rgb(80, 73, 40);
     grid-area: sidebar;
-    
+    line-height: 24px;
 }
 
 .sidebar ul {
     display: flex;
+    padding: 0;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     align-content: center;
     row-gap: 32px;
     margin-top: 16px;
+    margin-bottom: 0px;
     color: white;
     list-style: none;
     text-align: center;
@@ -70,22 +77,33 @@ header{
 
 .main-index{
     grid-area: main;
-    background-color: red;
+    margin: 64px;
+    background-color: rgb(209, 197, 142);
     display: grid;
     grid-template-areas: "carousel carousel"
     "principal tools";
+    grid-template-rows: auto auto;
+    grid-template-columns: 70% 30%;
 }
 
 .carrusel{
     grid-area: carousel;
     display: flex;
     justify-content: center;
-    
+}
 
+.carousel-inner{
+    width: 100%;
+    max-width: 100%;
 }
 
 .articles-container{
     flex-direction: column;
+    background-color: rgb(209, 197, 142);
+}
+
+.article-tools{
+    background-color: rgb(209, 197, 142);
 }
 
 .index-article-main{
@@ -120,10 +138,7 @@ header{
 
 .main-inscripcion-materias{
     grid-area: main;
-    display: grid;
-    background-color: red;
-    grid-template-rows: auto auto auto;
-    grid-template-columns: auto;
+    background-color: white;
 }
 
 .inscription-titles{
@@ -167,7 +182,7 @@ header{
 .main-inscripcion-historia{
     grid-area: main;
     display: grid;
-    background-color: red;
+    background-color: white;
     grid-template-rows: auto;
     grid-template-columns: auto;
 }
@@ -193,7 +208,7 @@ header{
 .main-inscripcion-asignatura{
     grid-area: main;
     display: grid;
-    background-color: red;
+    background-color: white;
     grid-template-rows: auto;
     grid-template-columns: auto;
 }
@@ -228,7 +243,7 @@ header{
 .main-asignatura {
     grid-area: main;
     display: grid;
-    background-color: red;
+    background-color:rgb(71, 70, 71);
     grid-template-rows: auto;
     grid-template-columns: auto;
 }
@@ -275,20 +290,21 @@ header{
 /* footer*/
 
 footer{
-    background-color: rgba(199, 183, 111, 0.78);
+    background-color: rgba(199, 183, 111);
     grid-area: footer;
 }
 
 .contact{
     display: flex;
+    height: 100%;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .location-telephone{
     display: flex;
+    gap: 0.5em;
     flex-direction: column;
     align-items: center;
-    margin: 24px;
-    
 }
 /* nav footer*/
