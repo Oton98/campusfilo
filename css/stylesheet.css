@@ -590,6 +590,11 @@ footer {
         padding: 0;
         align-items: center;
     }
+
+    .send-information{
+        display: flex;
+        flex-direction: column;
+    }
     
     /* main recovery*/
     
