@@ -15,7 +15,7 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-areas: "sidebar header" "sidebar main" "sidebar footer";
-  grid-template-columns: 215px 8fr;
+  grid-template-columns: 150px 8fr;
   grid-template-rows: 10vh auto auto;
 }
 body p {
