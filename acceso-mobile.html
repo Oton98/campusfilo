@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./css/stylesheet.css" rel="stylesheet">
+    <link href="./css/prueba.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1aecc3b378.js" crossorigin="anonymous"></script>
     <title>Campus Filo-Historia</title>
 </head>
@@ -20,7 +20,7 @@
         </div>
         <form class="desktop-access">
             <input type="text" placeholder="Nombre de usuario">
-            <input type="text" placeholder="Contraseña">
+            <input type="password" placeholder="Contraseña">
             <button class="btnindex" type="submit"><a href="./index.html">Acceder</a></button>
             <button class="btnindex" type="submit"><a href="./recuperaciónlogin.html">¿Olvidaste algún
                     dato?</a></button>
@@ -42,17 +42,16 @@
     <main class="mobile-acess">
         <section>
             <form class="recovery-form">
-                <div class="form-input">
+                <div class="recovery-form-input">
                     <label for="username"> Nombre de usuario: </label>
                     <input type="text" name="username" placeholder="Nombre de usuario">
                 </div>
-                <div class="form-input">
-                    <label for="password"> Contraseña: </label>
-                    <input type="password" name="password" placeholder="Contraseña">
+                <div class="recovery-form-input">
+                <label for="email"> Contraseña: </label>
+                <input type="text" name="email" placeholder="Contraseña">
                 </div>
-                <div class="send-information">
-                    <button class="btnindex" type="submit"><a href="./index.html">Enviar Información</a></button>
-                    <button class="btnindex" type="submit"><a href="./recuperaciónlogin.html">Olvidé la Contraseña</a></button>
+                <div class="recovery-form-send-information">
+                    <button class="btnindex" type="submit"><a href="./acceso-mobile.html">Iniciar Sesión</a></button>
                 </div>
             </form>
         </section>
@@ -106,6 +105,9 @@
 
         </section>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
