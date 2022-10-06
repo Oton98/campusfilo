@@ -4,7 +4,6 @@
     padding: 0;
     font-family: sans-serif;
     min-width: 0;
-
 }
 
 html {
@@ -118,9 +117,7 @@ header img {
 }
 
 .sidebar ul li a:hover {
-
     color: #00756c;
-
 }
 
 /* sidebar fin */
@@ -143,10 +140,6 @@ header img {
     grid-area: carousel;
     margin-bottom: 20px;
     
-}
-
-.slide{
-  
 }
 
 .carousel-inner {
@@ -194,7 +187,7 @@ header img {
     
 }
 
-.left-info {
+.index-article-left-info {
     display: flex;
     flex-direction: column;
     margin: 24px;
@@ -296,7 +289,7 @@ header img {
     margin: 32px;
 }
 
-.asignatura-subject-matter {
+.asignatura-subject{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -304,7 +297,7 @@ header img {
     column-gap: 64px;
 }
 
-.asignatura-subject {
+.asignatura-subject-matter {
     padding: 12px;
     border: solid 2px rgb(177, 177, 177);
     display: flex;
@@ -320,9 +313,9 @@ header img {
     row-gap: 12px;
 }
 
-/* main - plataforma de la asignatura*/
+/* main -mis materias*/
 
-.my-subjects{
+.main-my-subjects{
     grid-area: main;
     background-color: white;
     margin: 32px;
@@ -725,6 +718,7 @@ footer {
     }
 
     /* main - tablet foro*/
+    
     .main-asignatura {
         margin: 0px;
     }

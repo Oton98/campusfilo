@@ -1,0 +1,62 @@
+.main {
+    &-index {
+        grid-area: main;
+        background-color: $background-color-three;
+        display: grid;
+        grid-template-areas: "carousel carousel"
+            "principal tools";
+        grid-template-rows: auto auto;
+        grid-template-columns: 70% 30%;
+        padding: 50px;
+    }
+
+    &-inscripcion-materias {
+        @extend %maincorp;
+    }
+
+    &-inscripcion-historia {
+        @extend %maincorp;
+    }
+
+    &-inscripcion-asignatura {
+        @extend %maincorp;
+    }
+
+    &-asignatura {
+        @extend %maincorp;
+    }
+
+    &-my-subjects {
+        @extend %maincorp;
+    }
+
+}
+
+%maincorp {
+    grid-area: main;
+    background-color: $background-color-three;
+    margin: 32px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .main-inscripcion {
+        &-materias {
+            margin: 0;
+        }
+
+        &-historia {
+            margin: 0;
+        }
+
+        &-asignatura {
+            margin: 0;
+        }
+    }
+    
+    .main-asignatura {
+        margin: 0px;
+    }
+
+
+}

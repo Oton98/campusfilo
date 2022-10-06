@@ -1,0 +1,32 @@
+.subject-matters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 32px;
+    row-gap: 32px;
+    justify-content: space-between;
+    a {
+    padding: 12px;
+    border: solid 2px $border-color-two;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    color: $font-color;
+        p {
+        background-color: $background-color-four;
+        display: flex;
+        justify-content: center;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .subject-matters {
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+
+}
+ 

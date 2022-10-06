@@ -1,0 +1,8 @@
+.carrusel {
+    grid-area: carousel;
+    margin-bottom: 20px;
+    &-inner {
+    width: 100%;
+    max-width: 100%;
+    }
+}

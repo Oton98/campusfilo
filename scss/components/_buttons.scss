@@ -1,0 +1,18 @@
+.btnindex {
+    background-color: transparent;
+    border: none;
+    color: $font-color-two;
+    a {
+        padding: 5px;
+        background-color: $background-color-two;
+        border-radius: 10px;
+        text-decoration: none;
+        color: $hover-buttons-color;
+        transition-property: all;
+        transition-duration: 300ms;
+    }
+    a:hover {
+        background-color: $background-hover-button;
+        color: $font-color-three;
+    }
+}

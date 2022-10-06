@@ -1,0 +1,18 @@
+.subject-matters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    a {
+    padding: 12px;
+    border: solid 2px $border-color-two;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    color: $font-color;
+        p {
+        background-color: $background-color-four;
+        display: flex;
+        justify-content: center;
+        }
+    }
+}
