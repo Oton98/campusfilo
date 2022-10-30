@@ -32,31 +32,5 @@
 
 }
 
-%maincorp {
-    grid-area: main;
-    background-color: $background-color-three;
-    margin: 32px;
-}
-
-@media screen and (max-width: 768px) {
-
-    .main-inscripcion {
-        &-materias {
-            margin: 0;
-        }
-
-        &-historia {
-            margin: 0;
-        }
-
-        &-asignatura {
-            margin: 0;
-        }
-    }
-    
-    .main-asignatura {
-        margin: 0px;
-    }
 
 
-}

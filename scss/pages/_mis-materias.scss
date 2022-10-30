@@ -1,7 +1,5 @@
 .subject-matters {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    @include flexbox(row, space-between, stretch);
     a {
     padding: 12px;
     border: solid 2px $border-color-two;

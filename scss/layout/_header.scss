@@ -1,49 +1,14 @@
 header {
     padding: 0px 20px;
     border-bottom: 2px solid $border-color;
-    display: flex;
+    @include flexbox;
     flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     background-color: $background-color-one;
     text-align: right;
     grid-area: header;
+    
     img {
-    height: 48px;
+        height: 48px;
     }
 }
 
-@media screen and (max-width: 480px) {
-
-    header {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-}
-
-@media screen and (max-width: 768px) {
-
-    header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-
-        .img-logo-portable {
-            display: block;
-        }
-
-        .img-logo-desktop {
-            display: none;
-        }
-
-        .mobile-access {
-            display: block;
-        }
-
-        .desktop-access {
-            display: none;
-        }
-    }
-}

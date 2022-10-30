@@ -1,9 +1,7 @@
 @import "./utils/variables";
-@import "./utils/functions";
 @import "./utils/mixins";
 
 @import  "./base/reset";
-@import  "./base/typo";
 
 @import "./layout/body";
 @import "./layout/footer";
@@ -16,8 +14,11 @@
 @import "./components/images";
 @import "./components/carousel.scss";
 
+@import "./pages/access-recovery";
 @import "./pages/_index.scss";
 @import "./pages/_inscripcion-materias.scss";
 @import "./pages/inscripcion-historia";
 @import "./pages/inscripcion-asignatura.scss";
 @import "./pages/subindexcampus.scss";
+
+@import "./mobile.scss";

@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/prueba.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="../css/stylesheet.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1aecc3b378.js" crossorigin="anonymous"></script>
+    <title>Portal Historia Argentina I</title>
 </head>
 
-<body>
+<body id="body">
     <header>
         <div class="img-logo-desktop">
             <img src="../img/logo-filo8.png" alt="logo-filosofia-y-letras">
@@ -20,122 +23,281 @@
         <form class="desktop-access">
             <input type="text" placeholder="Nombre de usuario">
             <input type="password" placeholder="Contraseña">
-            <button class="btnindex" type="submit"><a href="../index.html">Acceder</a></button>
-            <button class="btnindex" type="submit"><a href="../recuperaciónlogin.html">¿Olvidaste algún dato?</a></button>
+            <button class="btnindex" type="submit"><a href="./historia-argentina-bienvenida.html">Acceder</a></button>
+            <button class="btnindex" type="submit"><a href="../recuperaciónlogin.html">¿Olvidaste algún
+                    dato?</a></button>
         </form>
         <form class="mobile-access">
             <button class="btnindex" type="submit"><a href="../acceso-mobile.html">Iniciar sesión</a></button>
         </form>
     </header>
 
-    <div class="sidebar">
-        <ul>
-            <li><i class="fa-sharp fa-solid fa-bars"></i></li>
-            <li><a href="../index.html">Página Principal</a></li>
-            <li><a href="../incripción-materias.html">Inscripción a materias</a></li>
-            <li><a href="../mis-materias.html">Mis Materias</a></li>
+    <div id="mySidebar" class="sidebar">
+        <ul class="expand-sidebar" id="expand-sidebar">
+            <li id="btntoggle" onclick="toggleNav();"><i class="fa-sharp fa-solid fa-bars"></i></li>
+            <li class="botones"><a href="../index.html"><i class="fa-solid fa-house"></i>
+                    <p class="sidebartext">Página Principal</p>
+                </a></li>
+            <li class="botones"><a href="../incripción-materias.html"><i class="fa-solid fa-book-medical"></i>
+                    <p class="sidebartext">Inscripción a materias</p>
+                </a></li>
+            <li class="botones"><a href="../mis-materias.html"><i class="fa-solid fa-book-open"></i>
+                    <p class="sidebartext">Mis Materias</p>
+                </a></li>
         </ul>
     </div>
+    
+    <main class="main-asignatura">
+        <section class="inscription-titles">
+            <h1>Inscripción a Materias (Cuatrimestre X, Días Y a Z)</h1>
+            <ul>
+                <li>
+                    <a href="../index.html">
+                        <h2> Página principal /</h2>
+                    </a>
+                </li>
+                <li>
+                    <a href="../mis-materias.html">
+                        <h2> Mis materias /</h2>
+                    </a>
+                </li>
+                <li>
+                    <a href="../subindex-historia-argentina/historia-argentina-bienvenida.html">
+                        <h2> Bienvenida /</h2>
+                    </a>
+                </li>
+            </ul>
+        </section>
 
-        <main class="main-asignatura">
-            <section class="inscription-titles">
-                <h1>Inscripción a Materias (Cuatrimestre X, Días Y a Z)</h1>
+        <section class="platform">
+            <form class="platform-menu">
                 <ul>
-                    <li>
-                        <a href="../index.html">
-                            <h2> Página principal /</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../mis-materias.html">
-                            <h2> Mis materias /</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../subindex-historia-argentina/historia-argentina-bienvenida.html">
-                            <h2> Bienvenida /</h2>
-                        </a>
-                    </li>
+                    <li><a href="./historia-argentina-bienvenida.html">Bienvenida</a></li>
+                    <li><a href="./teorico.html">Teórico</a></li>
+                    <li><a href="./teoricos-practicos.html">Teórico-Práctico</a></li>
+                    <li><a href="./comision.html">Comisión</a></li>
                 </ul>
-            </section>
+            </form>
+            <div class="platform-corp">
+                <h3>Bienvenidos</h3>
+                <img src="../img/historia-argentina.jpg">
 
-            <section class="platform">
-                <form class="platform-menu">
-                    <ul >
-                        <li><a href="./historia-argentina-bienvenida.html">Bienvenida</a></li>
-                        <li><a href="./teorico.html">Teórico</a></li>
-                        <li><a href="./teoricos-practicos.html">Teórico-Práctico</a></li>
-                        <li><a href="./comision.html">Comisión</a></li>
+                <h4>Objetivos</h4>
+                <p>Los objetivos planteados por la cátedra para el cursado de la materia son los siguientes:</p>
+                <ol>
+                    <li>Proporcionar a los estudiantes un conocimiento global del período.</li>
+                    <li>Lograr una mejor comprensión
+                        de las estructuras socio-económicas y de las particulares formas de Estado, sociedad, política y
+                        cultura existentes en la primera mitad del siglo XIX</li>
+                    <li> Iniciar a los estudiantes, a través de la
+                        realización de lecturas críticas de la bibliografía y el acercamiento a fuentes y a los más
+                        recientes trabajos históricos del período, en el ejercicio de las aptitudes básicas para la
+                        investigación histórica.</li>
+                </ol>
+
+                <h4>Evaluación y Regularidad</h4>
+                <p>
+                <ol>
+                    <li>
+                        <h5>ORGANIZACIÓN DEL DICTADO DE LA MATERIA</h5>
+                        <p>La materia se dicta en modalidad virtual mientras duren las restricciones establecidas por el
+                            Aislamiento Social Preventivo y Obligatorio definido por el gobierno nacional (DNU
+                            297/2020). Su funcionamiento se adecua a lo establecido en la Res. (D) Nº 732/20 y a la
+                            normativa específica dispuesta a los efectos de organizar el dictado a distancia.</p>
+                        <p>El dictado de clases se realiza a través del campus virtual de la Facultad de Filosofía y
+                            Letras y de otros canales de comunicación virtual que se consideren pertinentes para
+                            favorecer el intercambio pedagógico con los/las estudiantes.</p>
+                        <p>La carga horaria total es de 96 horas. </p>
+                    </li>
+                    <li>
+                        <h5>MODALIDAD DE TRABAJO</h5>
+                        <p>En el desarrollo de la materia se dictarán tres tipos de clases virtuales en encuentros
+                            sincrónicos y seguimiento de lecturas por parte de los/as estudiantes: las teóricas (2 horas
+                            semanales), las teórico-prácticas (2 horas semanales) y las prácticas (2 horas semanales con
+                            asistencia obligatoria).</p>
+
+                        <p>Las clases teóricas se consagrarán a la exposición y discusión de temas y problemas
+                            centrales del período. Las clases teórico-prácticas consistirán en el análisis de nudos
+                            problemáticos con bibliografía específica y fuentes que se indicarán en el inicio del curso.
+                            En las clases prácticas se analizarán y discutirán los textos indicados para tal fin en el
+                            programa. En todas las clases se utilizarán diferentes herramientas digitales: powerpoint,
+                            mapas conceptuales, videos.</p>
+                    </li>
+                    <li>
+                        <h5>ORGANIZACIÓN DE LA EVALUACIÓN</h5>
+                        <p>Se evaluará de manera permanente el trabajo de los estudiantes, procurando que las instancias
+                            de evaluación se constituyan en actividades que desarrollen y estimulen los hábitos de
+                            lectura, de reflexión y de crítica de fuentes y bibliografía.
+
+                            EF – EXAMEN FINAL:
+
+                            El régimen con examen final comprende 2 (dos) instancias de evaluación parcial.
+
+                            Se debe cumplir con los siguientes requisitos:
+
+                            i. participación de las actividades propuestas por la cátedra;
+
+                            ii. aprobar 2 (dos) instancias de evaluación parcial (o sus respectivos recuperatorios) con
+                            un mínimo de 4 (cuatro) puntos en cada instancia.</p>
+                        <p>El examen final, que abarcará la totalidad del programa, se iniciará con la exposición por
+                            parte del alumno de alguno de los temas del programa y continuará con preguntas sobre otros
+                            aspectos de la materia.
+
+                            Quienes no alcancen las condiciones establecidas para el régimen con EXAMEN FINAL deberán
+                            reinscribirse u optar por rendir la materia en calidad de libre.
+
+                            Aprobación de un EXAMEN FINAL es con una nota mínima de 4 (cuatro) puntos.
+
+                            El primer llamado de los turnos de julio y diciembre no estará disponible para los
+                            estudiantes que regularizan la cursada en el cuatrimestre inmediato anterior a los mismos.
+                        </p>
+                    </li>
+                </ol>
+                </p>
+
+                <h4>Días y Horarios de Clase</h4>
+
+                <table>
+                    <tr>
+                        <th>Teóricos (Noemí Goldman-Julio Djenderedjian)</th>
+                    </tr>
+                    <tr>
+                        <th>Día</th>
+                        <th>Hora</th>
+                        <th>Aula</th>
+                    </tr>
+                    <tr>
+                        <td>Martes</td>
+                        <td>17 a 19hs</td>
+                        <td>236</td>
+                    </tr>
+
+                </table>
+                <table>
+                    <tr>
+                        <th>Teóricos-Prácticos (Fabio Wasserman-Noemí Goldman-Julio Djenderedjian)</th>
+                    </tr>
+                    <tr>
+                        <th>Día</th>
+                        <th>Hora</th>
+                        <th>Aula</th>
+                    </tr>
+                    <tr>
+                        <td>Jueves</td>
+                        <td>19 a 21hs</td>
+                        <td>145</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Comisiones de Trabajos Prácticos</th>
+                    </tr>
+                    <tr>
+                        <th>Comisión</th>
+                        <th>Día</th>
+                        <th>Hora</th>
+                        <th>Aula</th>
+                        <th>Profesor</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Martes</td>
+                        <td>15 a 17hs</td>
+                        <td>246</td>
+                        <td>Nora Souto</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Martes</td>
+                        <td>19 a 21hs</td>
+                        <td>125</td>
+                        <td>Mariano Aramburo</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Jueves</td>
+                        <td>17 a 19hs</td>
+                        <td>137</td>
+                        <td>Agustín Galimberti</td>
+                    </tr>
+                </table>
+
+                    <h4>Disponibilidad de Materiales</h4>
+                    <p>Todo el material necesario para el desarrollo de la cursada se encuentra disponible en:</p>
+                    <ol>
+                        <li>Campus (guías de lectura, bibliografía, material para los teóricos y los teóricos prácticos
+                            y
+                            cuadernillos de fuentes)</li>
+                        <li>CEFyL. </li>
+                        <li> OPFyL (Los tres cuadernillos de fuentes impresos, que también se encuentran de manera
+                            digital
+                            en el campus)</li>
+                    </ol>
+                    <p>La mayoría de los libros pueden ser consultados en</p>
+                    <ul>
+                        <li>Biblioteca Central "Prof. Augusto Raúl Cortazar" (ubicada en el subsuelo de la Facultad)
+                            http://bibliotecas.filo.uba.ar</li>
+                        <li>Biblioteca del Instituto de Historia Argentina y Americana "Dr. Emilio Ravignani" (25 de
+                            Mayo 221 -
+                            2do piso, Horario: Lunes a viernes de 10.00 a 19.00 hs) mail: referenciaravignani@gmail.com
+                        </li>
+                        <li>Biblioteca Nacional (Agüero 2502).</li>
                     </ul>
-                </form>
-                <div class="platform-corp">
-                    <h3>Bienvenidos</h3>
-                    <img  src="../img/historia-argentina.jpg">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus aliquam rem eligendi debitis
-                        excepturi deserunt quia unde itaque! Eius nostrum eum consequatur cum ab qui asperiores ipsum
-                        ratione!
-                        Sapiente, ipsum!
-                        Voluptates, autem! Quasi repellendus unde rem provident consequatur esse animi minus, officiis
-                        impedit.
-                        Doloremque vel voluptatibus quidem dolore reprehenderit facere itaque animi et obcaecati
-                        repudiandae,
-                        voluptas explicabo repellat nam iure?
-                        Error consectetur nemo impedit quasi architecto quibusdam obcaecati perspiciatis hic est? Tempore
-                        perspiciatis aperiam delectus, beatae inventore temporibus rem quam, harum modi sunt eaque in quos
-                        eum
-                        architecto? Perferendis, nemo.
-                        Quasi consequuntur voluptatum magni libero et itaque sint, repellendus dolor rerum quia vero
-                        recusandae
-                        beatae, inventore id impedit non tenetur. Voluptatum quis, voluptatem aliquid velit aut doloremque
-                        fuga
-                        expedita rerum.
-                        Neque ex, quaerat cum accusamus sequi error, perferendis saepe soluta magnam doloremque nisi tempora
-                        deleniti ipsa et nihil quidem, dicta eaque architecto iusto dolore obcaecati voluptatem harum quo?
-                        Provident, iure.</p>
-                </div>
-            </section>
-        </main>
-        <footer>
-            <section class="contact">
-    
-                <article class="location-telephone">
-                    <a href="https://www.google.com/maps/place/UBA/@-34.6288086,-58.4471408,17z/data=!4m5!3m4!1s0x0:0x5221a25fa3668ab1!8m2!3d-34.6284654!4d-58.4464834"><i class="fa-sharp fa-solid fa-map"></i></a>
-                    <p>Sede Puan</p>
-                    <i class="fa-solid fa-phone-volume"></i>
-                    <p>(011)5287-2600</p>
-                </article>
-    
-                <article class="location-telephone">
-                    <a href="https://www.google.com/maps/place/Instituto+de+Historia+Argentina+y+Americana+%22Dr.+Emilio+Ravignani%22/@-34.6051488,-58.3709573,21z/data=!4m13!1m7!3m6!1s0x95a3352d45a8ce99:0x516cdbbc876d7971!2s25+de+Mayo+217,+C1002+ABE,+Buenos+Aires!3b1!8m2!3d-34.6051334!4d-58.370836!3m4!1s0x95a3352d45929533:0x87f2280d9028c24a!8m2!3d-34.6051359!4d-58.3708696"><i class="fa-sharp fa-solid fa-map"></i></a>
-                    <p>Sede 25 de Mayo</p>
-                    <i class="fa-solid fa-phone-volume"></i>
-                    <p>(011)4343-5981/1196</p>
-                </article>
-    
-                <article class="location-telephone">
-                    <a href=""><i class="fa-sharp fa-solid fa-map"></i></a>
-                    <p>Sede Tilcara</p>
-                    <i class="fa-solid fa-phone-volume"></i>
-                    <p>(0388) 4955-768</p>
-                </article>
-    
-                <article class="location-telephone">
-                    <a href="https://www.google.com/maps/place/CIDAC/@-34.6433724,-58.3916593,15z/data=!4m2!3m1!1s0x0:0x15d365898f63b15?sa=X&ved=2ahUKEwjup5X3xaD6AhURpZUCHTKOBGYQ_BJ6BAhMEAU"><i class="fa-sharp fa-solid fa-map"></i></a>
-                    <p>CIDAC</p>
-                    <i class="fa-solid fa-phone-volume"></i>
-                    <p>(011) 4302-2887</p>
-                </article>
-    
-                <article class="location-telephone">
-                    <a href="https://www.google.com/maps/place/Museo+Etnogr%C3%A1fico+Juan+B.+Ambrosetti/@-34.6113435,-58.3712214,15z/data=!4m2!3m1!1s0x0:0x3af4edfbc8665d58?sa=X&ved=2ahUKEwj_oYWYxqD6AhVZrpUCHTjlCqgQ_BJ6BAhrEAU"><i class="fa-sharp fa-solid fa-map"></i></a>
-                    <p>Museo Etnográfico</p>
-                    <i class="fa-solid fa-phone-volume"></i>
-                    <p>(011) 4345-8196/97</p>
-                </article>
-    
-            </section>
-        </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+
+
+            </div>
+        </section>
+    </main>
+    <footer>
+        <section class="contact">
+
+            <article class="location-telephone">
+                <a
+                    href="https://www.google.com/maps/place/UBA/@-34.6288086,-58.4471408,17z/data=!4m5!3m4!1s0x0:0x5221a25fa3668ab1!8m2!3d-34.6284654!4d-58.4464834"><i
+                        class="fa-sharp fa-solid fa-map"></i></a>
+                <p>Sede Puan</p>
+                <i class="fa-solid fa-phone-volume"></i>
+                <p>(011)5287-2600</p>
+            </article>
+
+            <article class="location-telephone">
+                <a
+                    href="https://www.google.com/maps/place/Instituto+de+Historia+Argentina+y+Americana+%22Dr.+Emilio+Ravignani%22/@-34.6051488,-58.3709573,21z/data=!4m13!1m7!3m6!1s0x95a3352d45a8ce99:0x516cdbbc876d7971!2s25+de+Mayo+217,+C1002+ABE,+Buenos+Aires!3b1!8m2!3d-34.6051334!4d-58.370836!3m4!1s0x95a3352d45929533:0x87f2280d9028c24a!8m2!3d-34.6051359!4d-58.3708696"><i
+                        class="fa-sharp fa-solid fa-map"></i></a>
+                <p>Sede 25 de Mayo</p>
+                <i class="fa-solid fa-phone-volume"></i>
+                <p>(011)4343-5981/1196</p>
+            </article>
+
+            <article class="location-telephone">
+                <a href=""><i class="fa-sharp fa-solid fa-map"></i></a>
+                <p>Sede Tilcara</p>
+                <i class="fa-solid fa-phone-volume"></i>
+                <p>(0388) 4955-768</p>
+            </article>
+
+            <article class="location-telephone">
+                <a
+                    href="https://www.google.com/maps/place/CIDAC/@-34.6433724,-58.3916593,15z/data=!4m2!3m1!1s0x0:0x15d365898f63b15?sa=X&ved=2ahUKEwjup5X3xaD6AhURpZUCHTKOBGYQ_BJ6BAhMEAU"><i
+                        class="fa-sharp fa-solid fa-map"></i></a>
+                <p>CIDAC</p>
+                <i class="fa-solid fa-phone-volume"></i>
+                <p>(011) 4302-2887</p>
+            </article>
+
+            <article class="location-telephone">
+                <a
+                    href="https://www.google.com/maps/place/Museo+Etnogr%C3%A1fico+Juan+B.+Ambrosetti/@-34.6113435,-58.3712214,15z/data=!4m2!3m1!1s0x0:0x3af4edfbc8665d58?sa=X&ved=2ahUKEwj_oYWYxqD6AhVZrpUCHTjlCqgQ_BJ6BAhrEAU"><i
+                        class="fa-sharp fa-solid fa-map"></i></a>
+                <p>Museo Etnográfico</p>
+                <i class="fa-solid fa-phone-volume"></i>
+                <p>(011) 4345-8196/97</p>
+            </article>
+
+        </section>
+    </footer>
+    <script src="../sidebar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
 </body>

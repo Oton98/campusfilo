@@ -1,0 +1,223 @@
+//body
+
+@media screen and (max-width: 860px) {
+    body{
+        grid-template-rows: 10vh auto 30vh;
+    }
+
+}
+
+@media screen and (max-width: 510px) {
+
+    body {
+        width: 100%;
+        min-height: 100%;
+        grid-template-areas: "header"
+            "sidebar"
+            "main"
+            "footer";
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+    }
+    .body-wrap{
+        grid-template-columns: auto;
+    }
+}
+
+//header
+
+@media screen and (max-width: 840px) {
+
+    header {
+        @include flexbox (row, space-around, center);
+
+        .img-logo-portable {
+            display: block;
+        }
+
+        .img-logo-desktop {
+            display: none;
+        }
+
+        .mobile-access {
+            display: block;
+        }
+
+        .desktop-access {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    header {
+        @include flexbox(row, space-around);
+    }
+}
+
+//sidebar
+
+@media screen and (max-width: 1280px) {
+    .sidebar ul li a {
+        column-gap: 4px;
+    }
+
+}
+
+@media screen and (max-width: 860px) {
+    .sidebar ul li {
+        
+        padding: 0;
+    }
+
+    .sidebar ul li a {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+@media screen and (max-width: 510px) {
+    .sidebar ul li .sidebartext-hidden {
+        display: block;
+    }
+}
+
+// main
+
+@media screen and (max-width: 768px) {
+
+    .main-inscripcion {
+        &-materias {
+            margin: 0;
+        }
+
+        &-historia {
+            margin: 0;
+        }
+
+        &-asignatura {
+            margin: 0;
+        }
+    }
+    
+    .main-asignatura {
+        margin: 0px;
+    }
+
+}
+
+// footer
+
+@media screen and (max-width: 860px) {
+
+    .contact {
+        @include flexbox(row, space-evenly, );
+        flex-wrap: wrap;
+        column-gap: 20px;
+        row-gap: 20px;
+        height: 100%;
+    }
+
+    .location-telephone {
+        gap: 0.5em;
+        @include flexbox(column, stretch, );
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    footer{
+        margin-top: 12px;
+    }
+}
+
+
+
+@media screen and (max-width: 480px) {
+
+    .contact{
+        @include flexbox(column, space-evenly, flex-start);
+    }
+
+    .location-telephone{
+        flex-direction: row;
+    }
+
+}
+
+// mains de las paginas
+
+@media screen and (max-width: 1280px) {
+
+    .main-index {
+        grid-template-areas: "carousel"
+            "principal"
+            "tools";
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+        padding: 0px;
+        margin: 20px 0px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .main-index {
+            grid-template-areas: "carousel"
+                "principal"
+                "tools";
+            grid-template-rows: auto;
+            grid-template-columns: auto;
+            padding: 0px;
+            margin: 20px 0px;
+        }
+
+    .asignatura-subject-matter {
+        @include flexbox(column);
+        column-gap: 64px;
+    }
+
+    .subject-matters {
+        @include flexbox(column, stretch);
+        margin: 0;
+    }
+    
+    .platform-menu ul li a {
+        padding: 0px;
+    }
+
+    .platform-corp {
+        padding: 0;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .index-article {
+
+        &-main {
+            grid-template-rows: auto;
+            grid-template-columns: auto;
+            row-gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        &-text p {
+            padding: 12px;
+        }
+
+        &-img {
+            justify-content: center;
+        }
+
+        .left-info {
+            margin: 0px;
+        }
+
+    }
+}
