@@ -1,0 +1,8 @@
+
+
+.notes{
+    @include flexbox (row, space-evenly, space-evenly);
+    height: 40vh;
+    width: 60vw;
+    background-color: $background-color-four,
+}

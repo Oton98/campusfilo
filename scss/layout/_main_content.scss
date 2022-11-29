@@ -30,6 +30,11 @@
         @extend %maincorp;
     }
 
+    &-profesores{
+        @extend %maincorp;
+        @include flexbox();
+    }
+
 }
 
 

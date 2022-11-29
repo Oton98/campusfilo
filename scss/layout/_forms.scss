@@ -1,4 +1,4 @@
-.mobile-access{
+.mobile-access {
     display: none;
 }
 
@@ -7,7 +7,7 @@
     row-gap: 12px;
 }
 
-.login-form{
+.login-form {
     background-color: $background-color-four;
     width: 40vh;
     height: 30vh;
@@ -16,31 +16,31 @@
     gap: 20px;
     border-radius: 30px;
 
-    &-input{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: $font-color;
-    width: 80%;
+    &-input {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: $font-color;
+        width: 80%;
     }
 
     &-send-information {
-    display: flex;
-    justify-content: center;
-    
+        display: flex;
+        justify-content: center;
+
     }
 
-    .btnindex{
+    .btnindex {
         display: flex;
         flex-direction: row;
         justify-content: center;
         width: 80%;
 
     }
-   
+
 }
 
-.recovery-form{
+.recovery-form {
     background-color: $background-color-four;
     width: 40vh;
     height: 40vh;
@@ -48,28 +48,82 @@
     @include flexbox(column, center);
     gap: 20px;
     border-radius: 30px;
-    
 
-    &-input{
-    @include flexbox(column, center, stretch);
-    color: $font-color;
-    width: 80%;
+
+    &-input {
+        @include flexbox(column, center, stretch);
+        color: $font-color;
+        width: 80%;
     }
 
     &-send-information {
-    @include flexbox();
-    
+        @include flexbox();
+
     }
 
-    .btnindex{
+    .btnindex {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        
+
         width: 80%;
-        
+
     }
-   
+
 }
 
+.form-notes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 
+    &-inputs-data {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5vh;
+    }
+
+    &-inputs-notes {
+        display: flex;
+        flex-direction: row;
+        column-gap: 2vw;
+    }
+
+    &-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &-table {
+        display: flex;
+        justify-content: flex-start;
+        column-gap: 5vw;
+        padding: 12px;
+    }
+
+    &-table-tr {
+        display: flex;
+        column-gap: 1vw;
+        background-color: $background-color-three;
+        padding: 4px;
+    }
+}
+
+.form-admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 30vw;
+    width: 30vw;
+    background-color: $background-color-four;
+
+    &-buttons {
+        display: flex;
+        justify-content: center;
+        width: 10vw;
+    }
+
+
+}
