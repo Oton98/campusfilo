@@ -1,11 +1,4 @@
 //Plantilla de Carrera (Creacion, Modificación, Eliminación)
-
-let btnAgregarMateria = document.getElementById("btnagregar-carreras");
-btnAgregarMateria.addEventListener("click", sumarCarrera);
-
-let idCarrera = 0
-let agregarCarrera = [];
-
 class Carrera {
     constructor(idCarrera, nCarrera, nMaterias) {
         this.idCarrera = idCarrera
@@ -14,57 +7,90 @@ class Carrera {
     }
 }
 
+let idCarrera = 0
+let agregarCarrera = [];
+
 let tablaCarrera = document.getElementById("tableCareer");
 let cuerpo = document.getElementById("cuerpotabla")
+
+//Creacion de Carrera
+
+let btnAgregarCarrera = document.getElementById("btnagregar-carreras");
+btnAgregarCarrera.addEventListener("click", e => { e.preventDefault(); sumarCarrera()});
 
 function sumarCarrera() {
 
     let nombreCarrera = document.getElementById("nombreCarrera").value;
     let cantidadMaterias = document.getElementById("cantidadMaterias").value;
+    chequeoNumerosMaterias = parseInt(cantidadMaterias);
+    chequeoNombreMaterias = parseInt(nombreCarrera);
 
+    if (Number.isInteger(chequeoNumerosMaterias) && (isNaN(chequeoNombreMaterias))) {
 
-    idCarrera += 1
+        idCarrera += 1
 
-    let nuevaCarrera = new Carrera(idCarrera, nombreCarrera, cantidadMaterias);
-    agregarCarrera.push(nuevaCarrera);
+        let nuevaCarrera = new Carrera(idCarrera, nombreCarrera, cantidadMaterias);
+        agregarCarrera.push(nuevaCarrera);
 
-    console.log(agregarCarrera);
+        console.log(agregarCarrera);
 
-    let fila = document.createElement("tr");
+        //creo la fila
 
-    fila.id = "fila-" + idCarrera;
-    fila.className = "form-notes-table-tr";
+        let fila = document.createElement("tr");
+        fila.id = "fila-" + idCarrera;
+        fila.className = "form-notes-table-tr";
 
-    let td = document.createElement("td");
-    td.innerText = nuevaCarrera.idCarrera;
-    fila.appendChild(td);
+        //creo la celda de datos
 
-    td = document.createElement("td");
-    td.innerText = nuevaCarrera.nCarrera;
-    td.id = `carrera-${idCarrera}`
-    fila.appendChild(td);
+        let td = document.createElement("td");
+        //le paso a la celda de datos el id
+        td.innerText = nuevaCarrera.idCarrera;
+        fila.appendChild(td);
 
-    td = document.createElement("td");
-    td.innerText = nuevaCarrera.nMaterias;
-    td.id = `materias-${idCarrera}`
-    fila.appendChild(td);
+        td = document.createElement("td");
+        //le paso a la celda de datos Nombre de Carrera
+        td.innerText = nuevaCarrera.nCarrera;
+        td.id = `carrera-${idCarrera}`
+        fila.appendChild(td);
 
-    td = document.createElement("td");
-    let checkbox = document.createElement('input');
-    checkbox.className = "checkbox"
-    checkbox.type = "checkbox";
-    checkbox.id = idCarrera;
-    td.appendChild(checkbox);
+        td = document.createElement("td");
+        //le paso a la celda de datos Numero de Materias
+        td.innerText = nuevaCarrera.nMaterias;
+        td.id = `materias-${idCarrera}`
+        fila.appendChild(td);
 
-    fila.appendChild(td);
+        td = document.createElement("td");
+        //le paso a la celda de datos el Checkbox
+        let checkbox = document.createElement('input');
+        checkbox.className = "checkbox"
+        checkbox.type = "checkbox";
+        checkbox.id = idCarrera;
+        td.appendChild(checkbox);
 
-    cuerpo.appendChild(fila);
+        fila.appendChild(td);
 
+        cuerpo.appendChild(fila);
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Materia agregada satisfactoriamente',
+            showConfirmButton: false,
+            timer: 1000
+        })
+
+    } else {
+
+        alert("Valores Ingresados Erróneos");
+
+    }
 }
 
+//Eliminar de Carrera
 
 let btnBorrarCarrera = document.getElementById("btnborrar-carrera");
-btnBorrarCarrera.addEventListener("click", borrarCarrera);
+btnBorrarCarrera.addEventListener("click", e => { e.preventDefault() 
+    borrarCarrera()});
 
 const inputs = document.getElementsByClassName('checkbox');
 
@@ -88,7 +114,10 @@ function borrarCarrera() {
 }
 
 let btnModificarCarrera = document.getElementById("btnmodificar-carrera");
-btnModificarCarrera.addEventListener("click", modificarCarrera);
+btnModificarCarrera.addEventListener("click", e => { e.preventDefault() 
+    modificarCarrera()});
+
+//Modificar de Carrera    
 
 function modificarCarrera() {
     let carrera;
@@ -118,36 +147,66 @@ function modificarCarrera() {
 
 //Creación de materias
 
-function agregarMateria() {
+// let btnAgregarMateria = document.getElementById("btnagregar-carreras");
+// btnAgregarCarrera.addEventListener("click", agregarMateria);
 
-}
+// let idCarrera = 0
+// let agregarMateria = [];
 
-function borrarMateria() {
-
-}
-
-function modificarMateria() {
-
-}
-
-//Agregar profesores a plantilla
-
-let numeroProfesores = 0
-let Profesoresingresados = 0
-
+// class Materia {
+//     constructor(idMateria, nMateria, cantidadhoras, nprofesores, modalidadcursada, cuatrimestre) {
+//         this.idMateria = idMateria;
+//         this.nMateria = nMateria;
+//         this.cantidadhoras = cantidadhoras;
+//         this.nprofesores = nprofesores;
+//         this.modalidadcursada = modalidadcursada;
+//         this.cuatrimestre = cuatrimestre;
+//     }
+// }
 
 
-function agregarProfesor() {
-    numeroProfesores = parseInt(prompt("Ingrese numero de profesores que tendrá la cátedra"));
-    if (isNaN(numeroProfesores)) {
-        alert("el valor indicado no es un número");
-    } else {
-        for (Profesoresingresados = 0; Profesoresingresados < numeroProfesores; Profesoresingresados++)
-            nombreProfesor = prompt("Ingrese nombre del profesor");
-        Profesoresingresados = Profesoresingresados++;
-        alert("hay un total de " + Profesoresingresados) + "asignados a la cátedra";
-    }
-}
+// function agregarMateria() {
+//     let nombreMateria = document.getElementById("nombreMateria").value;
+//     let cantidadMaterias = document.getElementById("cantidadProfesores").value;
+//     let cantidadMaterias = document.getElementById("cantidadHs").value;
+//     let cantidadMaterias = document.getElementById("regimenCursada").value;
+//     let cantidadMaterias = document.getElementById("cuatrimestre").value;
+// }
+
+// let btnBorrarMateria = document.getElementById("btnborrar-materia");
+// btnAgregarCarrera.addEventListener("click", borrarMateria);
+
+// function borrarMateria() {
+
+
+
+// }
+
+// let btnModificarMateria = document.getElementById("btnmodificar-carreras");
+// btnModificarMateria.addEventListener("click", modificarMateria);
+
+// function modificarMateria() {
+
+// }
+
+// //Agregar profesores a plantilla
+
+// let numeroProfesores = 0
+// let Profesoresingresados = 0
+
+
+
+// function agregarProfesor() {
+//     numeroProfesores = parseInt(prompt("Ingrese numero de profesores que tendrá la cátedra"));
+//     if (isNaN(numeroProfesores)) {
+//         alert("el valor indicado no es un número");
+//     } else {
+//         for (Profesoresingresados = 0; Profesoresingresados < numeroProfesores; Profesoresingresados++)
+//             nombreProfesor = prompt("Ingrese nombre del profesor");
+//         Profesoresingresados = Profesoresingresados++;
+//         alert("hay un total de " + Profesoresingresados) + "asignados a la cátedra";
+//     }
+// }
 
 function borrarProfesor() {
 
