@@ -11,16 +11,60 @@ let idCarrera = 0
 let agregarCarrera = [];
 
 let tablaCarrera = document.getElementById("tableCareer");
-let cuerpo = document.getElementById("cuerpotabla")
+let cuerpo = document.getElementById("cuerpotabla");
+
+//Recuperacion del localStorage
+
+for (let i = 0; i < localStorage.length; i++) {
+    let clave = localStorage.key(i);
+    let valorRecuperado = localStorage.getItem(clave);
+    let valorParseado = JSON.parse(valorRecuperado);
+    //cambio de nombre de idParse para que no se rompa el programa
+    let { idCarrera: idParsed, nCarrera, nMaterias } = valorParseado;
+
+    let nuevaCarrera = new Carrera(idParsed, nCarrera, nMaterias);
+    agregarCarrera.push(nuevaCarrera)
+
+    let fila = document.createElement("tr");
+    fila.id = "fila-" + idParsed;
+
+    let th = document.createElement("th");
+    th.innerText = nuevaCarrera.idCarrera;
+    th.scope = "row";
+    fila.appendChild(th);
+
+    td = document.createElement("td");
+    td.innerText = nuevaCarrera.nCarrera;
+    td.id = `carrera-${idParsed}`
+    fila.appendChild(td);
+
+    td = document.createElement("td");
+    td.innerText = nuevaCarrera.nMaterias;
+    td.id = `materias-${idParsed}`
+    fila.appendChild(td);
+
+    td = document.createElement("td");
+    let checkbox = document.createElement('input');
+    checkbox.className = "checkbox"
+    checkbox.type = "checkbox";
+    checkbox.id = idParsed;
+    td.appendChild(checkbox);
+
+    fila.appendChild(td);
+    cuerpo.appendChild(fila);
+    idCarrera = Math.max(idCarrera, idParsed);
+
+}
 
 //Creacion de Carrera
 
 let btnAgregarCarrera = document.getElementById("btnagregar-carreras");
-btnAgregarCarrera.addEventListener("click", e => { e.preventDefault(); sumarCarrera()});
+btnAgregarCarrera.addEventListener("click", e => { e.preventDefault(); sumarCarrera() });
 
 function sumarCarrera() {
 
     let nombreCarrera = document.getElementById("nombreCarrera").value;
+
     let cantidadMaterias = document.getElementById("cantidadMaterias").value;
     chequeoNumerosMaterias = parseInt(cantidadMaterias);
     chequeoNombreMaterias = parseInt(nombreCarrera);
@@ -38,14 +82,14 @@ function sumarCarrera() {
 
         let fila = document.createElement("tr");
         fila.id = "fila-" + idCarrera;
-        fila.className = "form-notes-table-tr";
 
         //creo la celda de datos
 
-        let td = document.createElement("td");
+        let th = document.createElement("th");
         //le paso a la celda de datos el id
-        td.innerText = nuevaCarrera.idCarrera;
-        fila.appendChild(td);
+        th.innerText = nuevaCarrera.idCarrera;
+        th.scope = "row";
+        fila.appendChild(th);
 
         td = document.createElement("td");
         //le paso a la celda de datos Nombre de Carrera
@@ -67,17 +111,21 @@ function sumarCarrera() {
         checkbox.id = idCarrera;
         td.appendChild(checkbox);
 
+        //le paso a la fila los td
         fila.appendChild(td);
-
+        //le paso la fila a la tabla
         cuerpo.appendChild(fila);
 
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Materia agregada satisfactoriamente',
-            showConfirmButton: false,
-            timer: 1000
-        })
+        let nuevoRegistro = JSON.stringify(nuevaCarrera);
+        localStorage.setItem("materia_" + idCarrera, nuevoRegistro);
+
+        // Swal.fire({
+        //     position: 'center',
+        //     icon: 'success',
+        //     title: 'Materia agregada satisfactoriamente',
+        //     showConfirmButton: false,
+        //     timer: 1000
+        // })
 
     } else {
 
@@ -89,33 +137,36 @@ function sumarCarrera() {
 //Eliminar de Carrera
 
 let btnBorrarCarrera = document.getElementById("btnborrar-carrera");
-btnBorrarCarrera.addEventListener("click", e => { e.preventDefault() 
-    borrarCarrera()});
+btnBorrarCarrera.addEventListener("click", e => {
+    e.preventDefault()
+    borrarCarrera()
+});
 
-const inputs = document.getElementsByClassName('checkbox');
 
 function borrarCarrera() {
-
-
+    
+    const inputs = document.getElementsByClassName('checkbox');
     const tamanoInputs = inputs.length;
 
-    console.log("inputs", inputs);
-
     for (let i = 0; i < tamanoInputs; i++) {
-        let checkbox = inputs[0];
-        console.log("inputs", inputs[0]);
+        let checkbox = inputs[i];
+        console.log(checkbox);
         if (checkbox.checked) {
             let fila = document.getElementById("fila-" + checkbox.id);
+            console.log(fila);
             cuerpo.removeChild(fila);
-
+            localStorage.removeItem('materia_' + checkbox.id)
+            
         }
     }
-
 }
 
+
 let btnModificarCarrera = document.getElementById("btnmodificar-carrera");
-btnModificarCarrera.addEventListener("click", e => { e.preventDefault() 
-    modificarCarrera()});
+btnModificarCarrera.addEventListener("click", e => {
+    e.preventDefault()
+    modificarCarrera()
+});
 
 //Modificar de Carrera    
 
@@ -123,6 +174,8 @@ function modificarCarrera() {
     let carrera;
     let materias;
     let contadorCheckbox = 0;
+    const inputs = document.getElementsByClassName('checkbox');
+
     for (let input of inputs) {
         if (input.checked) {
             contadorCheckbox++;

@@ -294,15 +294,6 @@ header img {
   max-width: 100%;
 }
 
-.form-notes-table {
-  display: flex;
-  flex-direction: column;
-}
-.form-notes-table-title {
-  display: flex;
-  flex-direction: row;
-}
-
 .mobile-acess {
   display: flex;
   flex-direction: row;
