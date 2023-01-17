@@ -71,7 +71,19 @@ function sumarCarrera() {
     let cantidadMaterias = document.getElementById("cantidadMaterias").value;
     chequeoNumerosMaterias = parseInt(cantidadMaterias);
     chequeoNombreMaterias = parseInt(nombreCarrera);
+    let recuperacionCarerras = JSON.parse(localStorage.getItem("carreras"))
 
+    if (recuperacionCarerras !== null) {
+        
+        for (let i = 0; i < recuperacionCarerras.length; i++) {
+            let comprobacioncarrera = recuperacionCarerras[i];
+            if (nombreCarrera == comprobacioncarrera) {
+                alert("la carrera ya se encuentra creada y almacenda");
+            }
+        }
+    }
+
+    //donde pongo esto? lo hago una funcion??
     if (Number.isInteger(chequeoNumerosMaterias) && (isNaN(chequeoNombreMaterias))) {
 
         idCarrera += 1
@@ -127,7 +139,8 @@ function sumarCarrera() {
         } else {
             totalCarreras.unshift(nombreCarrera);
         }
-        localStorage.setItem("carreras", totalCarreras);
+        let carrerasJson = JSON.stringify(totalCarreras)
+        localStorage.setItem("carreras", carrerasJson);
 
     } else {
 
@@ -160,9 +173,14 @@ function borrarCarrera() {
             nombreCarrera = nombreCarrera.innerText
             cuerpo.removeChild(fila);
             localStorage.removeItem(nombreCarrera)
-            let carreras = localStorage.getItem("carreras");
-            carreras = totalCarreras.filter(carrera => carrera === nombreCarrera);
-            localStorage.setItem("carreras", carreras);
+            //tengo que parsearlo sino jamas me va a devolver un array, que genio
+            let carreras = JSON.parse(localStorage.getItem("carreras"));
+            let index = carreras.indexOf(nombreCarrera);
+            if (index !== -1) {
+                carreras.splice(index, 1);
+                localStorage.setItem("carreras", JSON.stringify(carreras));
+            }
+
         }
     }
 }
