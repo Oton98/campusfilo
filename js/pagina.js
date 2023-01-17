@@ -9,6 +9,7 @@ class Carrera {
 
 let idCarrera = 0
 let agregarCarrera = [];
+let totalCarreras = [];
 
 let tablaCarrera = document.getElementById("tableCareer");
 let cuerpo = document.getElementById("cuerpotabla");
@@ -18,42 +19,44 @@ let cuerpo = document.getElementById("cuerpotabla");
 for (let i = 0; i < localStorage.length; i++) {
     let clave = localStorage.key(i);
     let valorRecuperado = localStorage.getItem(clave);
-    let valorParseado = JSON.parse(valorRecuperado);
-    //cambio de nombre de idParse para que no se rompa el programa
-    let { idCarrera: idParsed, nCarrera, nMaterias } = valorParseado;
+    try {
+        let valorParseado = JSON.parse(valorRecuperado);
+        let { idCarrera: idParsed, nCarrera, nMaterias } = valorParseado;
 
-    let nuevaCarrera = new Carrera(idParsed, nCarrera, nMaterias);
-    agregarCarrera.push(nuevaCarrera)
+        let nuevaCarrera = new Carrera(idParsed, nCarrera, nMaterias);
+        agregarCarrera.push(nuevaCarrera)
 
-    let fila = document.createElement("tr");
-    fila.id = "fila-" + idParsed;
+        let fila = document.createElement("tr");
+        fila.id = "fila-" + idParsed;
 
-    let th = document.createElement("th");
-    th.innerText = nuevaCarrera.idCarrera;
-    th.scope = "row";
-    fila.appendChild(th);
+        let th = document.createElement("th");
+        th.innerText = nuevaCarrera.idCarrera;
+        th.scope = "row";
+        fila.appendChild(th);
 
-    td = document.createElement("td");
-    td.innerText = nuevaCarrera.nCarrera;
-    td.id = `carrera-${idParsed}`
-    fila.appendChild(td);
+        td = document.createElement("td");
+        td.innerText = nuevaCarrera.nCarrera;
+        td.id = `carrera-${idParsed}`
+        fila.appendChild(td);
 
-    td = document.createElement("td");
-    td.innerText = nuevaCarrera.nMaterias;
-    td.id = `materias-${idParsed}`
-    fila.appendChild(td);
+        td = document.createElement("td");
+        td.innerText = nuevaCarrera.nMaterias;
+        td.id = `materias-${idParsed}`
+        fila.appendChild(td);
 
-    td = document.createElement("td");
-    let checkbox = document.createElement('input');
-    checkbox.className = "checkbox"
-    checkbox.type = "checkbox";
-    checkbox.id = idParsed;
-    td.appendChild(checkbox);
+        td = document.createElement("td");
+        let checkbox = document.createElement('input');
+        checkbox.className = "checkbox"
+        checkbox.type = "checkbox";
+        checkbox.id = idParsed;
+        td.appendChild(checkbox);
 
-    fila.appendChild(td);
-    cuerpo.appendChild(fila);
-    idCarrera = Math.max(idCarrera, idParsed);
-
+        fila.appendChild(td);
+        cuerpo.appendChild(fila);
+        idCarrera = Math.max(idCarrera, idParsed);
+    } catch (error) {
+        console.log("Valor no es un JSON válido: " + valorRecuperado);
+    }
 }
 
 //Creacion de Carrera
@@ -117,15 +120,14 @@ function sumarCarrera() {
         cuerpo.appendChild(fila);
 
         let nuevoRegistro = JSON.stringify(nuevaCarrera);
-        localStorage.setItem("materia_" + idCarrera, nuevoRegistro);
-
-        // Swal.fire({
-        //     position: 'center',
-        //     icon: 'success',
-        //     title: 'Materia agregada satisfactoriamente',
-        //     showConfirmButton: false,
-        //     timer: 1000
-        // })
+        localStorage.setItem(nombreCarrera, nuevoRegistro);
+        let carreras = localStorage.getItem("carreras");
+        if (!carreras) {
+            totalCarreras = [nombreCarrera];
+        } else {
+            totalCarreras.unshift(nombreCarrera);
+        }
+        localStorage.setItem("carreras", totalCarreras);
 
     } else {
 
@@ -144,7 +146,7 @@ btnBorrarCarrera.addEventListener("click", e => {
 
 
 function borrarCarrera() {
-    
+
     const inputs = document.getElementsByClassName('checkbox');
     const tamanoInputs = inputs.length;
 
@@ -152,11 +154,15 @@ function borrarCarrera() {
         let checkbox = inputs[i];
         console.log(checkbox);
         if (checkbox.checked) {
+            //usar splice
             let fila = document.getElementById("fila-" + checkbox.id);
-            console.log(fila);
+            let nombreCarrera = document.getElementById(`carrera-${checkbox.id}`);
+            nombreCarrera = nombreCarrera.innerText
             cuerpo.removeChild(fila);
-            localStorage.removeItem('materia_' + checkbox.id)
-            
+            localStorage.removeItem(nombreCarrera)
+            let carreras = localStorage.getItem("carreras");
+            carreras = totalCarreras.filter(carrera => carrera === nombreCarrera);
+            localStorage.setItem("carreras", carreras);
         }
     }
 }
@@ -189,85 +195,31 @@ function modificarCarrera() {
     } else {
         const nombreCarrera = document.getElementById("nombreCarrera").value;
         const cantidadMaterias = document.getElementById("cantidadMaterias").value;
+        let carreraStorage = localStorage.getItem(carrera.innerText);
+        //pisan el storage
+        carreraStorage.nCarrera = nombreCarrera;
+        carreraStorage.nMaterias = cantidadMaterias;
+        localStorage.removeItem(carrera.innerText);
+        localStorage.setItem(nombreCarrera, carreraStorage);
+        let carrerasArray = localStorage.getItem("carreras");
+        carrerasArray = carrerasArray.filter(carrera => carrera === carrera.innerText);
+        carrerasArray.push(carreraStorage.nCarrera);
+        localStorage.setItem("carreras", carrerasArray);
+        //pisan visualmente la tabla
         carrera.innerText = nombreCarrera;
         materias.innerText = cantidadMaterias;
     }
 
-    console.log(contadorCheckbox);
 
+
+    console.log(contadorCheckbox);
+    localStorage.setItem(nombreCarrera,);
 }
 
 
 //Creación de materias
 
-// let btnAgregarMateria = document.getElementById("btnagregar-carreras");
-// btnAgregarCarrera.addEventListener("click", agregarMateria);
 
-// let idCarrera = 0
-// let agregarMateria = [];
-
-// class Materia {
-//     constructor(idMateria, nMateria, cantidadhoras, nprofesores, modalidadcursada, cuatrimestre) {
-//         this.idMateria = idMateria;
-//         this.nMateria = nMateria;
-//         this.cantidadhoras = cantidadhoras;
-//         this.nprofesores = nprofesores;
-//         this.modalidadcursada = modalidadcursada;
-//         this.cuatrimestre = cuatrimestre;
-//     }
-// }
-
-
-// function agregarMateria() {
-//     let nombreMateria = document.getElementById("nombreMateria").value;
-//     let cantidadMaterias = document.getElementById("cantidadProfesores").value;
-//     let cantidadMaterias = document.getElementById("cantidadHs").value;
-//     let cantidadMaterias = document.getElementById("regimenCursada").value;
-//     let cantidadMaterias = document.getElementById("cuatrimestre").value;
-// }
-
-// let btnBorrarMateria = document.getElementById("btnborrar-materia");
-// btnAgregarCarrera.addEventListener("click", borrarMateria);
-
-// function borrarMateria() {
-
-
-
-// }
-
-// let btnModificarMateria = document.getElementById("btnmodificar-carreras");
-// btnModificarMateria.addEventListener("click", modificarMateria);
-
-// function modificarMateria() {
-
-// }
-
-// //Agregar profesores a plantilla
-
-// let numeroProfesores = 0
-// let Profesoresingresados = 0
-
-
-
-// function agregarProfesor() {
-//     numeroProfesores = parseInt(prompt("Ingrese numero de profesores que tendrá la cátedra"));
-//     if (isNaN(numeroProfesores)) {
-//         alert("el valor indicado no es un número");
-//     } else {
-//         for (Profesoresingresados = 0; Profesoresingresados < numeroProfesores; Profesoresingresados++)
-//             nombreProfesor = prompt("Ingrese nombre del profesor");
-//         Profesoresingresados = Profesoresingresados++;
-//         alert("hay un total de " + Profesoresingresados) + "asignados a la cátedra";
-//     }
-// }
-
-function borrarProfesor() {
-
-}
-
-function modificarProfesor() {
-
-}
 
 //Regularizar Alumnos - Carga de Notas por profesores al sistema
 
