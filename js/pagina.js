@@ -16,9 +16,12 @@ let cuerpo = document.getElementById("cuerpotabla");
 
 //Recuperacion del localStorage
 
-for (let i = 0; i < localStorage.length; i++) {
-    let clave = localStorage.key(i);
-    let valorRecuperado = localStorage.getItem(clave);
+//agarra el valor de parse, si no es undefined o null, sino agarra lo segundo 
+const carreras = JSON.parse(localStorage.getItem("carreras")) || []; 
+
+//recorro el array de carreras ya parseado y voy tirando las claves 1x1 para recuperar
+for (let i = 0; i < carreras.length; i++) {
+    let valorRecuperado = localStorage.getItem(carreras[i]);
     try {
         let valorParseado = JSON.parse(valorRecuperado);
         let { idCarrera: idParsed, nCarrera, nMaterias } = valorParseado;
@@ -67,24 +70,106 @@ btnAgregarCarrera.addEventListener("click", e => { e.preventDefault(); sumarCarr
 function sumarCarrera() {
 
     let nombreCarrera = document.getElementById("nombreCarrera").value;
-
     let cantidadMaterias = document.getElementById("cantidadMaterias").value;
+
     chequeoNumerosMaterias = parseInt(cantidadMaterias);
     chequeoNombreMaterias = parseInt(nombreCarrera);
+
     let recuperacionCarerras = JSON.parse(localStorage.getItem("carreras"))
 
     if (recuperacionCarerras !== null) {
-        
+        //chequea que si esta creada la carrera en el array
+        let repetido = false;
         for (let i = 0; i < recuperacionCarerras.length; i++) {
             let comprobacioncarrera = recuperacionCarerras[i];
             if (nombreCarrera == comprobacioncarrera) {
+                repetido = true
                 alert("la carrera ya se encuentra creada y almacenda");
+                break;
             }
-        }
-    }
 
-    //donde pongo esto? lo hago una funcion??
-    if (Number.isInteger(chequeoNumerosMaterias) && (isNaN(chequeoNombreMaterias))) {
+        } if (!repetido) {
+
+            if (Number.isInteger(chequeoNumerosMaterias) && (isNaN(chequeoNombreMaterias))) {
+
+                idCarrera += 1
+
+                let nuevaCarrera = new Carrera(idCarrera, nombreCarrera, cantidadMaterias);
+                agregarCarrera.push(nuevaCarrera);
+
+                console.log(agregarCarrera);
+
+                //creo la fila
+
+                let fila = document.createElement("tr");
+                fila.id = "fila-" + idCarrera;
+
+                //creo la celda de datos
+
+                let th = document.createElement("th");
+                //le paso a la celda de datos el id
+                th.innerText = nuevaCarrera.idCarrera;
+                th.scope = "row";
+                fila.appendChild(th);
+
+                td = document.createElement("td");
+                //le paso a la celda de datos Nombre de Carrera
+                td.innerText = nuevaCarrera.nCarrera;
+                td.id = `carrera-${idCarrera}`
+                fila.appendChild(td);
+
+                td = document.createElement("td");
+                //le paso a la celda de datos Numero de Materias
+                td.innerText = nuevaCarrera.nMaterias;
+                td.id = `materias-${idCarrera}`
+                fila.appendChild(td);
+
+                td = document.createElement("td");
+                //le paso a la celda de datos el Checkbox
+                let checkbox = document.createElement('input');
+                checkbox.className = "checkbox"
+                checkbox.type = "checkbox";
+                checkbox.id = idCarrera;
+                td.appendChild(checkbox);
+
+                //le paso a la fila los td
+                fila.appendChild(td);
+                //le paso la fila a la tabla
+                cuerpo.appendChild(fila);
+
+
+                let nuevoRegistro = JSON.stringify(nuevaCarrera);
+                localStorage.setItem(nombreCarrera, nuevoRegistro);
+                /*tengo que agarrar la key de carrera, reconvertirla al array, 
+                sumar la nueva carrera, volver a convertirlo a stringlify y guardar
+                en el localstorage
+                */
+                recuperacionCarerras = JSON.parse(localStorage.getItem("carreras"));
+                recuperacionCarerras.push(nombreCarrera);
+                let enviarLocalstorage = JSON.stringify(recuperacionCarerras);
+                localStorage.setItem("carreras", enviarLocalstorage);
+
+
+            } else {
+
+                alert("Valores Ingresados Erróneos");
+
+            }
+
+        }
+
+
+        //donde pongo esto? lo hago una funcion??
+
+        // let carreras = localStorage.getItem("carreras");
+        // if (!carreras) {
+        //     totalCarreras = [nombreCarrera];
+        // } else {
+        //     totalCarreras.unshift(nombreCarrera);
+        // }
+
+
+    } else if (Number.isInteger(chequeoNumerosMaterias) && (isNaN(chequeoNombreMaterias)) && recuperacionCarerras == null) {
 
         idCarrera += 1
 
@@ -131,22 +216,23 @@ function sumarCarrera() {
         //le paso la fila a la tabla
         cuerpo.appendChild(fila);
 
+        /*hago json al objeto de nuevaCarrera y 
+        creo un localstorage con el nombre de la carrera y los datos*/
+
         let nuevoRegistro = JSON.stringify(nuevaCarrera);
         localStorage.setItem(nombreCarrera, nuevoRegistro);
-        let carreras = localStorage.getItem("carreras");
-        if (!carreras) {
-            totalCarreras = [nombreCarrera];
-        } else {
-            totalCarreras.unshift(nombreCarrera);
-        }
-        let carrerasJson = JSON.stringify(totalCarreras)
+
+        /* le paso el nombre de la carrera al array, lo convierto a json
+        y creo un al localstorage con la clave carreras y el valor json.array   */
+
+        totalCarreras.unshift(nombreCarrera)
+        let carrerasJson = JSON.stringify(totalCarreras);
         localStorage.setItem("carreras", carrerasJson);
 
     } else {
-
         alert("Valores Ingresados Erróneos");
-
     }
+
 }
 
 //Eliminar de Carrera
@@ -195,37 +281,59 @@ btnModificarCarrera.addEventListener("click", e => {
 //Modificar de Carrera    
 
 function modificarCarrera() {
-    let carrera;
-    let materias;
+    let nombreCarreraSeleccionada;
+    let materiaCarreraSeleccionada;
+    let elementoNombreCarreraSeleccionada;
+    let elementoMateriasCarreraSeleccionada;
     let contadorCheckbox = 0;
     const inputs = document.getElementsByClassName('checkbox');
 
     for (let input of inputs) {
         if (input.checked) {
             contadorCheckbox++;
-            carrera = document.getElementById(`carrera-${input.id}`);
-            materias = document.getElementById(`materias-${input.id}`);
+            nombreCarreraSeleccionada = document.getElementById(`carrera-${input.id}`).innerText;
+            materiaCarreraSeleccionada = document.getElementById(`materias-${input.id}`).innerText;
+            elementoNombreCarreraSeleccionada = document.getElementById(`carrera-${input.id}`);
+            elementoMateriasCarreraSeleccionada = document.getElementById(`materias-${input.id}`)
         }
     }
 
     if (contadorCheckbox != 1) {
+
         alert("Seleccione un solo elemento");
+        
     } else {
-        const nombreCarrera = document.getElementById("nombreCarrera").value;
-        const cantidadMaterias = document.getElementById("cantidadMaterias").value;
-        let carreraStorage = localStorage.getItem(carrera.innerText);
-        //pisan el storage
-        carreraStorage.nCarrera = nombreCarrera;
-        carreraStorage.nMaterias = cantidadMaterias;
-        localStorage.removeItem(carrera.innerText);
-        localStorage.setItem(nombreCarrera, carreraStorage);
-        let carrerasArray = localStorage.getItem("carreras");
-        carrerasArray = carrerasArray.filter(carrera => carrera === carrera.innerText);
-        carrerasArray.push(carreraStorage.nCarrera);
-        localStorage.setItem("carreras", carrerasArray);
+        const nuevoNombreCarrera = document.getElementById("nombreCarrera").value;
+        const nuevaCantidadMaterias = document.getElementById("cantidadMaterias").value;
+        let carreraStorage = JSON.parse(localStorage.getItem("carreras"));
+        let carreraSeleccionada = JSON.parse(localStorage.getItem(nombreCarreraSeleccionada));
+
+        if (carreraStorage.includes(nuevoNombreCarrera)) {
+            alert("Ya está el el nombre de la carrera utilizado")
+        
+            return
+        } 
+        /*buscar en el array los elementos que coincidan con nombrecarrera
+        compararlo, elminarlo del array, pushearlo y volverlo a stringlifear para guardarlo
+        en el localstorage.
+
+            Remover
+        */
+        //piso el valor del nombre y las materias en el objeto y paso al localstorage
+        carreraSeleccionada.nCarrera = nuevoNombreCarrera;
+        carreraSeleccionada.nMaterias = nuevaCantidadMaterias;
+        localStorage.removeItem(nombreCarreraSeleccionada);
+        localStorage.setItem(nuevoNombreCarrera, JSON.stringify(carreraSeleccionada));
+
+        carreraStorage = carreraStorage.filter(carrera => carrera !== nombreCarreraSeleccionada);
+        carreraStorage.push(nuevoNombreCarrera);
+        localStorage.setItem("carreras", JSON.stringify(carreraStorage));
+        
         //pisan visualmente la tabla
-        carrera.innerText = nombreCarrera;
-        materias.innerText = cantidadMaterias;
+
+        elementoNombreCarreraSeleccionada.innerText = nuevoNombreCarrera;
+        elementoMateriasCarreraSeleccionada.innerText = nuevaCantidadMaterias;
+
     }
 
 
@@ -233,6 +341,9 @@ function modificarCarrera() {
     console.log(contadorCheckbox);
     localStorage.setItem(nombreCarrera,);
 }
+
+
+//funcion crear fila
 
 
 //Creación de materias
