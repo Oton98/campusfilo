@@ -55,6 +55,12 @@
         <section class="notes">
             <form action="#" class="form-notes">
                 <div class="form-notes-inputs-data">
+                    <select id="dropbox-carreras">
+
+                    </select>
+                    <output id="cantidad-carreras">
+
+                    </output>
                     <input type="text" id="nombreMateria" placeholder="Nombre de la materia">
                     <input type="text" id="cantidadProfesores" placeholder="Cantidad de profesores">
                     <input type="text" id="cantidadHs" placeholder="Cantidad de hs">
@@ -65,26 +71,24 @@
                     <button class="btnform" id="btnagregar-materia"> Agregar Materia </button>
                     <button class="btnform" id="btnborrar-materia"> Eliminar Materia </button>
                     <button class="btnform" id="btnmodificar-carreras"> Modificar Materia</button>
-                    <button class="btnform" type="submit"><a href="./administrativo-profesores.html">Ir a plantilla de profesores</a></button>
+                    <button class="btnform" type="submit"><a href="./administrativo-profesores.html">Ir a plantilla de
+                            profesores</a></button>
                 </div>
             </form>
-           
-            <table class="form-notes-table">
-                <tr>
-                    <td>
-                        <div class="form-notes-table-title">
-                            <h3>Carrera: X</h3>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="form-notes-table-tr">
-                    <th>ID de Materia</th>
-                    <th>Nombre de Materia</th>
-                    <th>Cantidad de Hs</th>
-                    <th>Cantidad de profesores</th>
-                    <th>Regimen de cursada</th>
-                    <th>Cuatrimestre</th>
-                </tr>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID de Materia</th>
+                        <th scope="col">Nombre de Materia</th>
+                        <th scope="col">Cantidad de Hs</th>
+                        <th scope="col">Cantidad de profesores</th>
+                        <th scope="col">Regimen de cursada</th>
+                        <th scope="col">Cuatrimestre</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpotabla">
+                </tbody>
             </table>
         </section>
     </main>
@@ -140,9 +144,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
-    <script src="../js/pagina.js"></script>
+
+    <script src="../js/materias.js" type="module"></script>
     <script src="../js/sidebar.js"></script>
-    
+
 </body>
 
 </html>

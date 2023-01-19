@@ -159,16 +159,6 @@ function sumarCarrera() {
         }
 
 
-        //donde pongo esto? lo hago una funcion??
-
-        // let carreras = localStorage.getItem("carreras");
-        // if (!carreras) {
-        //     totalCarreras = [nombreCarrera];
-        // } else {
-        //     totalCarreras.unshift(nombreCarrera);
-        // }
-
-
     } else if (Number.isInteger(chequeoNumerosMaterias) && (isNaN(chequeoNombreMaterias)) && recuperacionCarerras == null) {
 
         idCarrera += 1
@@ -176,7 +166,7 @@ function sumarCarrera() {
         let nuevaCarrera = new Carrera(idCarrera, nombreCarrera, cantidadMaterias);
         agregarCarrera.push(nuevaCarrera);
 
-        console.log(agregarCarrera);
+        console.log(nuevaCarrera);
 
         //creo la fila
 
@@ -253,7 +243,7 @@ function borrarCarrera() {
         let checkbox = inputs[i];
         console.log(checkbox);
         if (checkbox.checked) {
-            //usar splice
+          
             let fila = document.getElementById("fila-" + checkbox.id);
             let nombreCarrera = document.getElementById(`carrera-${checkbox.id}`);
             nombreCarrera = nombreCarrera.innerText
