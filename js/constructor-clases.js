@@ -6,6 +6,8 @@ export class Materia {
         this.cantidadHs = cantidadHs
         this.regimenCursada = regimenCursada
         this.cuatrimestre = cuatrimestre
+        this.profesores= []
+        this.alumnos = []
 
     }
 }

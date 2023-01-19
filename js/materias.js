@@ -1,46 +1,40 @@
-import {recuperarCarreras, crearFila, crearData, modificarTabla, recuperarObjetoCarrera} from './utils.js';
-import {limiteMaterias, checkCantidad, creadorEtiquetas} from './materias-utils.js'
-import {Materia} from './constructor-clases.js'
+import { recuperarCarreras, crearFila, crearData, modificarTabla, recuperarObjetoCarrera } from './utils.js';
+import { limiteMaterias, checkCantidad, creadorEtiquetas } from './materias-utils.js'
+import { Materia } from './constructor-clases.js'
 
 let materias = [];
 
 //cargar carreras
 
-//Recuperar del storage y hacer tabla
-/*1-buscar el json y parsearlo
-2-desempaquetar el objeto
-3-pasarle los valores del objeto a las funciones para crear la tabla
-4-hacer chequeos
-*/
-
-
 function cargarMaterias(materiasCarga) {
-    /*tengo que cuando cambia el valor del select, guardar el valor del nombre
-    del nuevo valor, con el nuevo valor, lo tengo que buscar en el storage
-    , traigo del objeto.materias toda la información. */
-    let carrerasRecuperadas = recuperarCarreras();
-    for (let i = 0; i < carrerasRecuperadas.length; i++) {
 
-        let valorRecuperado = JSON.parse(localStorage.getItem(carrerasRecuperadas[i]));
-        const { materias } = valorRecuperado;
+    let valorRecuperado = JSON.parse(localStorage.getItem(materiasCarga));
+
+    const { materias } = valorRecuperado;
+
+    try {
 
         for (let x = 0; x < materias.length; x++) {
 
-            let { idMateria, nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre } = materias[x];
-            
-            let fila = crearFila(idMateria);
+                let { idMateria, nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre } = materias[x];
 
-            let {id, tipo, cMaterias, hs, rCursada, tRegimen} = creadorEtiquetas();
+                let fila = crearFila(idMateria);
 
-            crearData(idMateria, id, idMateria, fila);
-            crearData(idMateria, tipo, nombreMateria, fila);
-            crearData(idMateria, cMaterias, cantidadProfesores, fila);
-            crearData(idMateria, hs, cantidadHs, fila);
-            crearData(idMateria, rCursada, regimenCursada, fila);
-            crearData(idMateria, tRegimen, cuatrimestre, fila);
+                let { id, tipo, cMaterias, hs, rCursada, tRegimen } = creadorEtiquetas();
 
-            modificarTabla(fila);
-        }
+                crearData(idMateria, id, idMateria, fila);
+                crearData(idMateria, tipo, nombreMateria, fila);
+                crearData(idMateria, cMaterias, cantidadProfesores, fila);
+                crearData(idMateria, hs, cantidadHs, fila);
+                crearData(idMateria, rCursada, regimenCursada, fila);
+                crearData(idMateria, tRegimen, cuatrimestre, fila);
+
+                modificarTabla(fila);
+            }
+
+    } catch (error) {
+
+        alert("No se han ingresado materias para la carrera " + valorRecuperado);
 
     }
 
@@ -58,8 +52,6 @@ let caracteristicasCarrera = []
 
 recuperarCaracteristicasCarreras();
 guardarDropbox(carreras);
-
-
 
 //2 recuperar objetos carreras y desempaquetarlo
 
@@ -98,7 +90,9 @@ let valorSeleccionado;
 select.addEventListener("change", function () {
     valorSeleccionado = this.value;
     cambiarOutputMaterias(valorSeleccionado);
+    //Borrar y crear el tbody para que no me duplique la tabla
     cargarMaterias(valorSeleccionado);
+    
 });
 
 function cambiarOutputMaterias(valorSeleccionado) {
@@ -111,15 +105,15 @@ function cambiarOutputMaterias(valorSeleccionado) {
 //cargar materias
 
 let btnAgregarMateria = document.getElementById("btnagregar-materia");
-btnAgregarMateria.addEventListener("click", e => { e.preventDefault(); agergarMateria() });
+btnAgregarMateria.addEventListener("click", e => { e.preventDefault(); agregarMateria() });
 
-function agergarMateria() {
+function agregarMateria() {
 
     let materiaCreada = pedirDatosInputs();
     let { idMateria, nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre } = materiaCreada;
     let fila = crearFila(idMateria);
 
-    let {id, tipo, cMaterias, hs, rCursada, tRegimen} = creadorEtiquetas();
+    let { id, tipo, cMaterias, hs, rCursada, tRegimen } = creadorEtiquetas();
 
     crearData(idMateria, id, idMateria, fila);
     crearData(idMateria, tipo, nombreMateria, fila);
@@ -132,14 +126,11 @@ function agergarMateria() {
 
     materias.push(materiaCreada);
 
-    let objetoActualizado = actualizarMaterias(materias);
+    actualizarMaterias(materias);
 
-    let valorSelect = document.getElementById('dropbox-carreras').value
-    actualizarStorage(valorSelect, objetoActualizado);
 
 }
 
-//1 tomar datos de los inputs
 function pedirDatosInputs() {
 
     let nombreMateria = document.getElementById("nombreMateria").value;
@@ -154,7 +145,6 @@ function pedirDatosInputs() {
 
 }
 
-// 1.5 crear nuevo objeto 
 
 function crearMateria(nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre) {
 
@@ -164,32 +154,14 @@ function crearMateria(nombreMateria, cantidadProfesores, cantidadHs, regimenCurs
 
 }
 
-//5 crear un objeto con los datos de la materia
-// el valor del objeto creado lo empujo al array de materias
-// tengo la propiedad objetocarrera.materias, le tengo que actualizar el array
-// crear en el objeto carrera, un campo "materias", "profesores". "alumnos"
-
 function actualizarMaterias(materiasArray) {
 
-    let valorSelect = document.getElementById('dropbox-carreras').value;
-    let objetoCarrera = recuperarObjetoCarrera(valorSelect);
+    let carreraSeleccionada = document.getElementById('dropbox-carreras').value;
+    let objetoCarrera = recuperarObjetoCarrera(carreraSeleccionada);
     objetoCarrera.materias = materiasArray;
-    return objetoCarrera;
+
+    localStorage.setItem(carreraSeleccionada, JSON.stringify(objetoCarrera));
 
 }
 
-//7 meter los datos el objeto de materia y guardarlo en el storage
 
-//intento eliminar la referencia circular
-
-function actualizarStorage(valorSelect, objetoActualizado) {
-    let objetoSinReferencias = JSON.stringify(objetoActualizado, (key, value) => {
-        if (key === "objetoCarrera") return;
-        return value;
-    });
-    localStorage.setItem(valorSelect, objetoSinReferencias);
-}
-
-
-//funcion borrar materia
-//funcion modificar materia

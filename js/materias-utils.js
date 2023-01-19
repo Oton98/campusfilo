@@ -1,6 +1,5 @@
 import './materias.js';
 
-
 export function limiteMaterias() {
 
     let valorSelect = document.getElementById("dropbox-carreras").value;
@@ -34,5 +33,5 @@ export function creadorEtiquetas() {
     } 
 
     return etiquetasMateria
-    
+
 }
