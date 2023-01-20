@@ -1,10 +1,18 @@
-import { recuperarCarreras, crearFila, crearData, modificarTabla, recuperarObjetoCarrera } from './utils.js';
+import { recuperarCarreras, crearFila, crearData, modificarTabla, recuperarObjetoCarrera, eliminarFilasTablas } from './utils.js';
 import { limiteMaterias, checkCantidad, creadorEtiquetas } from './materias-utils.js'
 import { Materia } from './constructor-clases.js'
 
 let materias = [];
 
-//cargar carreras
+let idMateria = 0;
+export let cantidadMaterias = [];
+
+let carreras = recuperarCarreras();
+let caracteristicasCarrera = []
+
+recuperarCaracteristicasCarreras();
+guardarDropbox(carreras);
+
 
 function cargarMaterias(materiasCarga) {
 
@@ -16,21 +24,21 @@ function cargarMaterias(materiasCarga) {
 
         for (let x = 0; x < materias.length; x++) {
 
-                let { idMateria, nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre } = materias[x];
+            let { idMateria, nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre } = materias[x];
 
-                let fila = crearFila(idMateria);
+            let fila = crearFila(idMateria);
 
-                let { id, tipo, cMaterias, hs, rCursada, tRegimen } = creadorEtiquetas();
+            let { id, tipo, cMaterias, hs, rCursada, tRegimen } = creadorEtiquetas();
 
-                crearData(idMateria, id, idMateria, fila);
-                crearData(idMateria, tipo, nombreMateria, fila);
-                crearData(idMateria, cMaterias, cantidadProfesores, fila);
-                crearData(idMateria, hs, cantidadHs, fila);
-                crearData(idMateria, rCursada, regimenCursada, fila);
-                crearData(idMateria, tRegimen, cuatrimestre, fila);
+            crearData(idMateria, id, idMateria, fila);
+            crearData(idMateria, tipo, nombreMateria, fila);
+            crearData(idMateria, cMaterias, cantidadProfesores, fila);
+            crearData(idMateria, hs, cantidadHs, fila);
+            crearData(idMateria, rCursada, regimenCursada, fila);
+            crearData(idMateria, tRegimen, cuatrimestre, fila);
 
-                modificarTabla(fila);
-            }
+            modificarTabla(fila);
+        }
 
     } catch (error) {
 
@@ -39,21 +47,6 @@ function cargarMaterias(materiasCarga) {
     }
 
 }
-
-//clase
-
-let idMateria = 0;
-export let cantidadMaterias = [];
-
-let carreras = recuperarCarreras();
-let caracteristicasCarrera = []
-
-//1 recuperar array de carreras,
-
-recuperarCaracteristicasCarreras();
-guardarDropbox(carreras);
-
-//2 recuperar objetos carreras y desempaquetarlo
 
 function recuperarCaracteristicasCarreras() {
     let carrerasRecuperadas = recuperarCarreras();
@@ -65,9 +58,13 @@ function recuperarCaracteristicasCarreras() {
 
 }
 
-//3 sumarselos al select
-
 function guardarDropbox(carreras) {
+
+    /* let option = document.createElement("option");
+    let valorDropboxDefault = "Seleccione una Carrera";
+    option.innerText = valorDropboxDefault;
+    let dropbox = document.getElementById("dropbox-carreras");
+    dropbox.appendChild(option); */
 
     for (let i = 0; i < carreras.length; i++) {
         let carrera = carreras[i];
@@ -81,18 +78,18 @@ function guardarDropbox(carreras) {
     document.getElementById('cantidad-carreras').value = limiteMaterias();
 }
 
-
-//cambiar valor del output 
-
 const select = document.getElementById("dropbox-carreras");
 let valorSeleccionado;
 
 select.addEventListener("change", function () {
+
     valorSeleccionado = this.value;
     cambiarOutputMaterias(valorSeleccionado);
-    //Borrar y crear el tbody para que no me duplique la tabla
+    let tabla = document.getElementById('cuerpotabla');
+    eliminarFilasTablas(tabla);
+   
     cargarMaterias(valorSeleccionado);
-    
+
 });
 
 function cambiarOutputMaterias(valorSeleccionado) {
@@ -100,9 +97,6 @@ function cambiarOutputMaterias(valorSeleccionado) {
     cantidadMaterias = nombreCarrera.nMaterias;
     document.getElementById('cantidad-carreras').value = parseInt(cantidadMaterias);
 }
-
-
-//cargar materias
 
 let btnAgregarMateria = document.getElementById("btnagregar-materia");
 btnAgregarMateria.addEventListener("click", e => { e.preventDefault(); agregarMateria() });
@@ -163,5 +157,14 @@ function actualizarMaterias(materiasArray) {
     localStorage.setItem(carreraSeleccionada, JSON.stringify(objetoCarrera));
 
 }
+
+function devolverSelectSinDefault(){
+
+}
+
+
+
+
+
 
 

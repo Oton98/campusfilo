@@ -40,3 +40,15 @@ export function recuperarObjetoCarrera(carrera) {
   return objetoCarrera;
 
 }
+
+export function eliminarFilasTablas(tabla) {
+    
+  let filas = tabla.getElementsByTagName("tr");
+  let cantidadFilas = filas.length;
+  for (let i = 0; i < cantidadFilas; i++){
+      tabla.removeChild(filas[0]);
+      
+  }
+  
+  
+}
