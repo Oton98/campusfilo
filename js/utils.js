@@ -10,7 +10,19 @@ export function crearData(id, tipoDato, valorDato, fila) {
 
   let td = document.createElement("td");
   td.innerText = valorDato;
-  td.id = tipoDato + "-" + valorDato;
+  td.id = tipoDato + "-" + id;
+  fila.appendChild(td);
+
+}
+
+export function crearCheckbox (id, tipoDato, fila) {
+
+  let td = document.createElement("td");
+  let checkbox = document.createElement("input");
+  checkbox.type = tipoDato;
+  checkbox.className = tipoDato;
+  checkbox.id = id;
+  td.appendChild(checkbox);
   fila.appendChild(td);
 
 }

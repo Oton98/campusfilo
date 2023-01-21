@@ -1,13 +1,23 @@
 import './materias.js';
 
-export function limiteMaterias() {
+export function limiteMaterias(carreras, valorSeleccionado) {
+    
+    let cantidadMaterias = 0
 
-    let valorSelect = document.getElementById("dropbox-carreras").value;
-    let carrera = JSON.parse(localStorage.getItem(valorSelect));
-    let limiteMaterias = carrera.nMaterias;
-    limiteMaterias = parseInt(limiteMaterias);
+    for (let i = 0; i < carreras.length; i++) {
 
-    return limiteMaterias;
+        
+
+        if (valorSeleccionado = carreras[i]) {
+            let carrera = JSON.parse(localStorage.getItem(valorSeleccionado));
+            cantidadMaterias = carrera.nMaterias;
+            cantidadMaterias = parseInt(cantidadMaterias);
+            break
+        }
+
+    }
+
+   return cantidadMaterias;
 
 }
 
@@ -29,9 +39,33 @@ export function creadorEtiquetas() {
         cMaterias: "cantidad-materias",
         hs: "cantidad-hs",
         rCursada: "regimen-cursada",
-        tRegimen : "cuatrimestre",
-    } 
+        tRegimen: "cuatrimestre",
+        checkbox: "checkbox",
+    }
 
     return etiquetasMateria
 
+}
+
+
+
+export function buscarCheckboxSeleccionado(inputs) {
+
+    let cuerpo = document.getElementById("cuerpotabla");
+
+    for (let i = 0; i < inputs.length; i++) {
+        let checkbox = inputs[i];
+
+        if (checkbox.checked) {
+
+            let fila = document.getElementById("fila-" + checkbox.id);
+            let nombreMateria = document.getElementById(`materia-${checkbox.id}`);
+            nombreMateria = nombreMateria.innerText;
+            cuerpo.removeChild(fila);
+            const carrera = recuperarObjetoCarrera(valorSeleccionado);
+            carrera.materias = carrera.materias.filter(materia => materia.nombreMateria !== nombreMateria);
+            localStorage.setItem(carrera.nCarrera, JSON.stringify(carrera))
+
+        }
+    }
 }
