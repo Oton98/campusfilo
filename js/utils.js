@@ -15,17 +15,17 @@ export function crearData(id, tipoDato, valorDato, fila) {
 
 }
 
-export function crearCheckbox (id, tipoDato, fila) {
+export function crearCheckbox (id, checkboxNuevo, fila) {
 
   let td = document.createElement("td");
-  let checkbox = document.createElement("input");
-  checkbox.type = tipoDato;
-  checkbox.className = tipoDato;
-  checkbox.id = id;
-  td.appendChild(checkbox);
+  checkboxNuevo = document.createElement("input");
+  checkboxNuevo.type = "checkbox";
+  checkboxNuevo.className = "checkboxNuevo";
+  checkboxNuevo.id = id;
+  td.appendChild(checkboxNuevo);
   fila.appendChild(td);
-
-}
+  
+  }
 
 //Empuja la fila creada a la tabla, 
 

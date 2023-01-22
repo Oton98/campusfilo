@@ -1,5 +1,5 @@
 import { recuperarCarreras, crearFila, crearData, modificarTabla, recuperarObjetoCarrera, eliminarFilasTablas, crearCheckbox } from './utils.js';
-import { limiteMaterias, checkCantidad, creadorEtiquetas, buscarCheckboxSeleccionado } from './materias-utils.js'
+import { limiteMaterias, checkCantidad, creadorEtiquetas} from './materias-utils.js'
 import { Materia } from './constructor-clases.js'
 
 let materias = [];
@@ -30,15 +30,15 @@ function cargarMaterias(materiasCarga) {
 
             let fila = crearFila(idMateria);
 
-            let { id, tipo, cMaterias, hs, rCursada, tRegimen, checkbox } = creadorEtiquetas();
+            let { id, tipo, cProfesores, hs, rCursada, tRegimen, checkboxNuevo } = creadorEtiquetas();
 
             crearData(idMateria, id, idMateria, fila);
             crearData(idMateria, tipo, nombreMateria, fila);
-            crearData(idMateria, cMaterias, cantidadProfesores, fila);
             crearData(idMateria, hs, cantidadHs, fila);
+            crearData(idMateria, cProfesores, cantidadProfesores, fila);
             crearData(idMateria, rCursada, regimenCursada, fila);
             crearData(idMateria, tRegimen, cuatrimestre, fila);
-            crearCheckbox(idMateria, checkbox, fila)
+            crearCheckbox(idMateria, checkboxNuevo, fila)
 
             modificarTabla(fila);
         }
@@ -112,25 +112,26 @@ function cambiarOutputMaterias(valorSeleccionado) {
 
 function agregarMateria() {
 
+    
 
-
-    let materiaCreada = pedirDatosInputs();
-    let { idMateria, nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre } = materiaCreada;
+    let datosInput = pedirDatosInputs();
+    const materia = crearMateria(datosInput.nombreMateria, datosInput.cantidadProfesores, datosInput.cantidadHs, datosInput.regimenCursada, datosInput.cuatrimestre);
+    let { idMateria, nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre } = materia;
     let fila = crearFila(idMateria);
 
-    let { id, tipo, cMaterias, hs, rCursada, tRegimen, checkbox } = creadorEtiquetas();
+    let { id, tipo, cProfesores, hs, rCursada, tRegimen, checkboxNuevo } = creadorEtiquetas();
 
     crearData(idMateria, id, idMateria, fila);
     crearData(idMateria, tipo, nombreMateria, fila);
-    crearData(idMateria, cMaterias, cantidadProfesores, fila);
     crearData(idMateria, hs, cantidadHs, fila);
+    crearData(idMateria, cProfesores, cantidadProfesores, fila);
     crearData(idMateria, rCursada, regimenCursada, fila);
     crearData(idMateria, tRegimen, cuatrimestre, fila);
-    crearCheckbox(idMateria, checkbox, fila);
+    crearCheckbox(idMateria, checkboxNuevo, fila);
 
     modificarTabla(fila);
 
-    actualizarMaterias(materiaCreada);
+    actualizarMaterias(materia);
 
 
 }
@@ -143,9 +144,8 @@ function pedirDatosInputs() {
     let regimenCursada = document.getElementById("regimenCursada").value;
     let cuatrimestre = document.getElementById("cuatrimestre").value;
 
-    const nuevaMateria = crearMateria(nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre);
 
-    return nuevaMateria;
+    return {nombreMateria, cantidadProfesores, cantidadHs, regimenCursada, cuatrimestre};
 
 }
 
@@ -176,28 +176,7 @@ btnBorrarMateria.addEventListener("click", e => {
 
 function borrarMateria() {
 
-    const inputs = document.getElementsByClassName('checkbox');
-
-    buscarCheckboxSeleccionado(inputs);
-
-}
-
-let btnModificarMateria = document.getElementById("btnmodificar-materias");
-btnModificarMateria.addEventListener("click", e => {
-    e.preventDefault()
-    ModificarMateria()
-});
-
-
-function modificarMateria() {
-
-    const inputs = document.getElementsByClassName('checkbox');
-
-    sinNombre(inputs);
-
-}
-
-function sinNombre(inputs) {
+    const inputs = document.getElementsByClassName('checkboxNuevo');
 
     let cuerpo = document.getElementById("cuerpotabla");
 
@@ -205,15 +184,60 @@ function sinNombre(inputs) {
         let checkbox = inputs[i];
 
         if (checkbox.checked) {
-            
-            //1- buscar en el localstorage la carrera,
-            //2- buscar en el objeto la propiedad materia,
-            //3- buscar en la propiedad materia, dentro del array el objeto 
-            //   con el nombre de la materia del checkbox (con un .find)
-            //4- pisar los valores del objeto con los de los inputs nuevos,
-            //5- stringlifearlos y guardalos,
-            //6- pisar la tabla con los valores nuevos,
-            
+
+            let fila = document.getElementById("fila-" + checkbox.id);
+            let nombreMateria = document.getElementById(`materia-${checkbox.id}`);
+            nombreMateria = nombreMateria.innerText;
+            cuerpo.removeChild(fila);
+            const carrera = recuperarObjetoCarrera(valorSeleccionado);
+            carrera.materias = carrera.materias.filter(materia => materia.nombreMateria !== nombreMateria);
+            localStorage.setItem(carrera.nCarrera, JSON.stringify(carrera))
+
+        }
+    }
+
+}
+
+let btnModificarMateria = document.getElementById("btnmodificar-materias");
+btnModificarMateria.addEventListener("click", e => {
+    e.preventDefault()
+    modificarMateria()
+});
+
+
+function modificarMateria() {
+
+    const inputs = document.getElementsByClassName('checkboxNuevo');
+
+    for (let i = 0; i < inputs.length; i++) {
+        let checkbox = inputs[i];
+
+        if (checkbox.checked) {
+
+            let elementoMateria = document.getElementById(`materia-${checkbox.id}`);
+            let id = checkbox.id;
+            elementoMateria = elementoMateria.innerText;
+            const carrera = recuperarObjetoCarrera(valorSeleccionado);
+            let materia = carrera.materias.find(materia => materia.nombreMateria == elementoMateria);
+            let datosInputs = pedirDatosInputs();
+
+            materia.nombreMateria = datosInputs.nombreMateria;
+            materia.cantidadProfesores = datosInputs.cantidadProfesores;
+            materia.cantidadHs = datosInputs.cantidadHs;
+            materia.regimenCursada = datosInputs.regimenCursada;
+            materia.cuatrimestre = datosInputs.cuatrimestre;
+
+            localStorage.setItem(carrera.nCarrera, JSON.stringify(carrera));
+
+            //pisar campos
+
+            document.getElementById(`materia-${id}`).innerText = materia.nombreMateria;
+            document.getElementById(`cantidad-profesores-${id}`).innerText = materia.cantidadProfesores;
+            document.getElementById(`cantidad-hs-${id}`).innerText = materia.cantidadHs;
+            document.getElementById(`regimen-cursada-${id}`).innerText = materia.regimenCursada;
+            document.getElementById(`cuatrimestre-${id}`).innerText = materia.cuatrimestre;
+
+
         }
     }
 }

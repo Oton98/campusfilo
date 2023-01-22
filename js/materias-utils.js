@@ -1,4 +1,5 @@
 import './materias.js';
+import './utils.js';
 
 export function limiteMaterias(carreras, valorSeleccionado) {
     
@@ -36,11 +37,11 @@ export function creadorEtiquetas() {
     let etiquetasMateria = {
         id: "id",
         tipo: "materia",
-        cMaterias: "cantidad-materias",
+        cProfesores: "cantidad-profesores",
         hs: "cantidad-hs",
         rCursada: "regimen-cursada",
         tRegimen: "cuatrimestre",
-        checkbox: "checkbox",
+        checkboxNuevo: "checkbox",
     }
 
     return etiquetasMateria
@@ -49,23 +50,3 @@ export function creadorEtiquetas() {
 
 
 
-export function buscarCheckboxSeleccionado(inputs) {
-
-    let cuerpo = document.getElementById("cuerpotabla");
-
-    for (let i = 0; i < inputs.length; i++) {
-        let checkbox = inputs[i];
-
-        if (checkbox.checked) {
-
-            let fila = document.getElementById("fila-" + checkbox.id);
-            let nombreMateria = document.getElementById(`materia-${checkbox.id}`);
-            nombreMateria = nombreMateria.innerText;
-            cuerpo.removeChild(fila);
-            const carrera = recuperarObjetoCarrera(valorSeleccionado);
-            carrera.materias = carrera.materias.filter(materia => materia.nombreMateria !== nombreMateria);
-            localStorage.setItem(carrera.nCarrera, JSON.stringify(carrera))
-
-        }
-    }
-}
